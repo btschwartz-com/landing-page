@@ -9,7 +9,7 @@ import './App.css';
 
 
 const title = 'Hey!'
-const tagline = 'Welcome to my website! Checkout my portfolio and resume below.'
+const tagline = 'Welcome to my website! Check out my stuff below.'
 
 
 const styles = {
