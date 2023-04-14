@@ -442,6 +442,18 @@ body {
   margin-top: 25px;
 }
 
+@media (max-width: 600px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-container .aws-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 .aws-btn {
   --button-default-height: 76px;
   --button-default-font-size: 21px;
