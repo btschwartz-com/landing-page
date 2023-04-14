@@ -26,6 +26,26 @@ const styles = {
   }
 }
 
+const buttonData = [
+  {
+    text: 'Portfolio',
+    link: 'https://btschwartz.com/portfolio/',
+    type: 'primary'
+  },
+  {
+    text: 'Resume',
+    link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
+    type: 'secondary'
+  },
+  {
+    text: 'Instagram Clone',
+    link: 'https://btschwartz.com/insta',
+    type: 'danger'
+  },
+  
+  
+]
+
 const words = ["color", "lines", "thick", "square", "fountain"];
 
 
@@ -52,17 +72,18 @@ const MovingElement = ({ element: Element, ...props }) => {
   );
 };
 
+
 const Buttons = () => {
   
   return (
     <div className="button-container">
-      <MovingElement element={() => 
-        <AwesomeButton type="primary" target="_blank" href="https://btschwartz.com/portfolio/">Portfolio</AwesomeButton>}>
-      </MovingElement>
-        
-      <MovingElement element={() => 
-        <AwesomeButton type="secondary" target="_blank" href="https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing">Resume</AwesomeButton>}>
-      </MovingElement>
+      {buttonData.map((button, index) => {
+        return (
+          <MovingElement element={() =>
+            <AwesomeButton type={button.type} target="_blank" href={button.link}>{button.text}</AwesomeButton>}>
+          </MovingElement>
+        )
+      })}
         
     </div>
   );

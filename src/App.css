@@ -440,4 +440,27 @@ body {
   --button-raise-level: 8px;
   --button-hover-pressure: 4;
   --transform-speed: 0.25s;
+  --button-primary-color: #6678c5;
+  --button-primary-color-dark: #3d50a1;
+  --button-primary-color-light: #ffffff;
+  --button-primary-color-hover: #5468be;
+  --button-primary-color-active: #4459b4;
+  --button-primary-border: none;
+  --button-secondary-color: #848289;
+  --button-secondary-color-dark: #5e5d62;
+  --button-secondary-color-light: #ffffff;
+  --button-secondary-color-hover: #77757c;
+  --button-secondary-color-active: #6b696f;
+  --button-secondary-border: none;
+  --button-anchor-color: #3eb7b9;
+  --button-anchor-color-dark: #2b7e80;
+  --button-anchor-color-light: #ffffff;
+  --button-anchor-color-hover: #3bafb1;
+  --button-anchor-color-active: #38a4a6;
+  --button-danger-color: #eba0bd;
+  --button-danger-color-dark: #de6191;
+  --button-danger-color-light: #ffffff;
+  --button-danger-color-hover: #e998b7;
+  --button-danger-color-active: #e78bae;
+  --button-danger-border: none;
 }
