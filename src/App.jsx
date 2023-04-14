@@ -31,7 +31,7 @@ const buttonData = [
   {
     text: 'Instagram Clone',
     link: 'https://btschwartz.com/insta',
-    type: 'danger'
+    type: 'secondary'
   },
   
   
