@@ -1,89 +1,113 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import Configs from './configurations.json';
+import React from 'react';
+
 import ParticlesBg from 'particles-bg';
 
 import { AwesomeButton } from "react-awesome-button";
+import MovingComponent from 'react-moving-text';
 import 'react-awesome-button/dist/styles.css';
+import './App.css';
+
+
+const title = 'Hey!'
+const tagline = 'Welcome to my website! Checkout my portfolio and resume below.'
+
+
+const styles = {
+  bg: {
+  },
+  titleLetterStyle: {       
+    display: 'inline-block',
+    fontSize: '3em',
+    fontFamily: 'Roboto, sans-serif',
+    color: 'white',
+    marginLeft: '0.02em',
+    marginRight: '0.02em',
+    textAlign: 'center',
+  }
+}
+
+const words = ["color", "lines", "thick", "square", "fountain"];
+
+
+function getRandomWord() {
+  const randomIndex = Math.floor(Math.random() * words.length);
+  console.log(words[randomIndex]);
+  return words[randomIndex];
+}
+
+const MovingElement = ({ element: Element, ...props }) => {
+  return (
+    <MovingComponent
+      type="unfold"
+      duration="1000ms"
+      delay="0s"
+      direction="alternate"
+      timing="ease"
+      iteration="1"
+      fillMode="none"
+      {...props}
+    >
+      <Element />
+    </MovingComponent>
+  );
+};
 
 const Buttons = () => {
+  
   return (
-    <>
-    <AwesomeButton 
-      type="primary" 
-      href="https://btschwartz.com/portfolio/" 
-    >
-      Portfolio
-    </AwesomeButton>
-    </>
+    <div className="button-container">
+      <MovingElement element={() => 
+        <AwesomeButton type="primary" target="_blank" href="https://btschwartz.com/portfolio/">Portfolio</AwesomeButton>}>
+      </MovingElement>
+        
+      <MovingElement element={() => 
+        <AwesomeButton type="secondary" target="_blank" href="https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing">Resume</AwesomeButton>}>
+      </MovingElement>
+        
+    </div>
   );
 }
 
+const Title = () => {
+  return (
+    <div className="container">
+      <MovingElement type='fadeIn' element={() => 
+        <h1 className='intro'>{title}</h1>}>
+      </MovingElement>      
+    </div>
+  );
+}
+
+
+
+const Tagline = () => {
+  return (
+    <div className="container">
+      <MovingElement type='fadeIn' element={() => 
+        <div className="tagline">
+          {tagline}
+        </div>}>
+      </MovingElement> 
+    </div>
+  );
+}
+
+
 const App = () => {
-  const [state, setState] = useState({
-    darkBackgroundModes: [
-      'day',
-      'terminal',
-      'torquoise',
-      'alizarin',
-      'amythyst',
-      'carrot',
-      'peterriver'
-    ],
-    lightBackgroundModes: [
-      'night',
-      'lightred',
-      'lightpurple',
-      'lightgreen',
-      'lightblue',
-      'lightyellow'
-    ],
-    backgroundType: Configs.backgroundType || 'plain',
-    appClass: Configs.plainBackgroundMode || 'daylight',
-    devIntro: Configs.devIntro || 'Lorem Ipsum',
-    devDesc:
-      Configs.devDesc ||
-      'Aute veniam ut deserunt cillum irure pariatur Lorem dolore anim nostrud quis veniam elit culpa.',
-    backgroundMode: 'default',
-    backgroundIndex: 0,
-    bgStyle: {},
-    icons: Configs.icons || []
-  });
 
-  useEffect(() => {
-    // Add any side effects here
-  }, []);
-
-  const {
-    appClass, bgStyle, backgroundMode, devIntro, devDesc, icons
-  } = state;
 
   return (
-    <div className={appClass} style={bgStyle}>
+    <div className='daylight' style={styles.bg}>
       <div
-        className={backgroundMode}
+        className='default'
       >
         <main className="App-main">
-          <ParticlesBg type="thick" bg={true} />
-          <div className="container">
-            <h1 className="intro">{devIntro}</h1>
-            <Buttons />
-            <div className="tagline">
-            </div>
-            
-            {/* <div className="icons-social">
-              {icons.map((icon, i) => (
-                <a
-                  target="_blank"
-                  key={i}
-                  rel="noopener noreferrer"
-                  href={`${icon.url}`}
-                >
-                  <i className={`fab ${icon.image}`} />
-                </a>
-              ))}
-            </div> */}
-          </div>
+          <ParticlesBg type={getRandomWord()} bg={true} />
+          <Title />
+          <Tagline />
+          <Buttons />
+
+
         </main>
       </div>
     </div>
