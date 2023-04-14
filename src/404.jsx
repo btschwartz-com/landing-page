@@ -8,72 +8,55 @@ import 'react-awesome-button/dist/styles.css';
 import './App.css';
 
 
-const title = 'Hey!'
-const tagline = 'Welcome to my website! Check out my stuff below.'
+const title = '404 :('
+const tagline = "This is sad. You've reached a page that doesn't exist."
 
 
 const styles = {
   bg: {
   },
+  titleLetterStyle: {       
+    display: 'inline-block',
+    fontSize: '3em',
+    fontFamily: 'Roboto, sans-serif',
+    color: 'white',
+    marginLeft: '0.02em',
+    marginRight: '0.02em',
+    textAlign: 'center',
+  }
 }
 
 const buttonData = [
   {
-    text: 'Portfolio',
-    link: 'https://btschwartz.com/portfolio/',
+    text: 'Return Home',
+    link: 'https://btschwartz.com/',
     type: 'primary'
   },
-  {
-    text: 'Resume',
-    link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
-    type: 'secondary'
-  },
-  {
-    text: 'Instagram Clone',
-    link: 'https://btschwartz.com/insta',
-    type: 'danger'
-  },
-  
-  
+
 ]
 
-
-const types = [
-  {
-    'type': 'circle',
-    'num': 4
-  },
-  {
-    'type': 'square',
-    'num': 6
-  },
-  {
-    'type': 'thick',
-    'num': 40
-  },
-]
+const words = ["tadpole"];
 
 
-
-function getRandomType() {
-  const randomIndex = Math.floor(Math.random() * types.length);
-  console.log(types[randomIndex]);
-  return types[randomIndex];
+function getRandomWord() {
+  const randomIndex = Math.floor(Math.random() * words.length);
+  console.log(words[randomIndex]);
+  return words[randomIndex];
 }
 
 const MovingElement = ({ element: Element, ...props }) => {
   return (
     <MovingComponent
-      type="unfold"
-      duration="1000ms"
-      delay="0s"
-      direction="alternate"
-      timing="ease"
-      iteration="1"
-      fillMode="none"
-      {...props}
+        type="unfold"
+        duration="1000ms"
+        delay="0s"
+        direction="alternate"
+        timing="ease"
+        iteration="1"
+        fillMode="none"
+        {...props}
     >
-      <Element />
+        <Element />
     </MovingComponent>
   );
 };
@@ -85,7 +68,7 @@ const Buttons = () => {
     <div className="button-container">
       {buttonData.map((button, index) => {
         return (
-          <MovingElement key={index} element={() =>
+          <MovingElement element={() =>
             <AwesomeButton type={button.type} target="_blank" href={button.link}>{button.text}</AwesomeButton>}>
           </MovingElement>
         )
@@ -97,7 +80,7 @@ const Buttons = () => {
 
 const Title = () => {
   return (
-    <div className="container">
+    <div className="container-blank">
       <MovingElement type='fadeIn' element={() => 
         <h1 className='intro'>{title}</h1>}>
       </MovingElement>      
@@ -109,7 +92,7 @@ const Title = () => {
 
 const Tagline = () => {
   return (
-    <div className="container">
+    <div className="container-blank">
       <MovingElement type='fadeIn' element={() => 
         <div className="tagline">
           {tagline}
@@ -120,9 +103,8 @@ const Tagline = () => {
 }
 
 
-const App = () => {
+const ErrorPage = () => {
 
-  const {type, num} = getRandomType();
 
   return (
     <div className='daylight' style={styles.bg}>
@@ -130,16 +112,15 @@ const App = () => {
         className='default'
       >
         <main className="App-main">
-          <ParticlesBg 
-            type={type} 
-            // color="#00ffbf"
-            bg={true} 
-            num={num} 
-            
-            />
-          <Title />
-          <Tagline />
-          <Buttons />
+            <ParticlesBg 
+                type={getRandomWord()} 
+                color="#00ffbf"
+                bg={true} 
+                num={30} 
+                />
+            <Title />
+            <Tagline />
+            <Buttons />
 
 
         </main>
@@ -148,4 +129,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default ErrorPage;
