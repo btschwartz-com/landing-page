@@ -477,11 +477,12 @@ body {
   --button-secondary-color-hover: #77757c;
   --button-secondary-color-active: #6b696f;
   --button-secondary-border: none;
-  --button-anchor-color: #3eb7b9;
-  --button-anchor-color-dark: #2b7e80;
-  --button-anchor-color-light: #ffffff;
-  --button-anchor-color-hover: #3bafb1;
-  --button-anchor-color-active: #38a4a6;
+  --button-anchor-color: #95d44a;
+  --button-anchor-color-dark: #52a934;
+  --button-anchor-color-light: #3f8228;
+  --button-anchor-color-hover: #89cf35;
+  --button-anchor-color-active: #7cbe2d;
+  --button-anchor-border: 2px solid #5bbd3a;
   --button-danger-color: #eba0bd;
   --button-danger-color-dark: #de6191;
   --button-danger-color-light: #ffffff;
