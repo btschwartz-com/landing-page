@@ -32,7 +32,12 @@ const fetchData = () => {
       const respData = {
         currentTime: data.current_time,
         joke: data.joke,
-        systemInfo: data.system_info,
+        os: data.system_info.os,
+        machine: data.system_info.machine,
+        processor: data.system_info.processor,
+        pythonVersion: data.system_info.python_version,
+        nodeName: data.system_info.node_name,
+        clientIP: data.client_ip
       }
       return respData;
     })
@@ -53,12 +58,18 @@ const Cole = () => {
         success: (respData) => {
           const joke = respData.joke;
           const currentTime = respData.currentTime;
-          const systemInfo = respData.systemInfo;
+          const { os, machine, processor, pythonVersion, nodeName, clientIP } = respData;
           return (
             "It's me, the server!\n\n" +
-            systemInfo + "\n\n" +
-            "The time is: " + currentTime + "\n\n" +
-            "Here's a joke: \n\n" + joke
+            "My name is " + nodeName + ". " +
+            'My operating system is ' + os + " " +
+            "and I'm running on a " + machine + " machine " +
+            "with a " + processor + " processor. " +
+            "I am currently running flask on Python " + pythonVersion + "." +
+            "\n\n" +
+            "Your IP address is: " + clientIP + "\n\n" +
+            "I live in New York, but to me the time is: " + currentTime + "\n\n" +
+            "Here's a joke: " + joke
           )
         },
               
@@ -88,7 +99,7 @@ const Cole = () => {
 }
   
   
-const explanation = "My name is Ben Schwartz, and you just found the landing page of my website. Please check out my protfolio, it's the only decent thing you'll find here.";
+const explanation = "My name is Ben Schwartz, and you just found the landing page of my website. Please check out my portfolio, it's the only decent thing you'll find here.";
   
 // const Cole = () => toast.error("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
 const Explanation = () => toast(explanation, {
