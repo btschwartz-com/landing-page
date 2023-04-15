@@ -144,7 +144,7 @@ const buttonData = [
     row: 3,
   },
   {
-    text: 'Hi Server',
+    text: 'Server',
     type: 'danger',
     row: 4,
     toast: Cole,
