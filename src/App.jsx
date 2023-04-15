@@ -4,12 +4,13 @@ import ParticlesBg from 'particles-bg';
 
 import { AwesomeButton } from "react-awesome-button";
 import MovingComponent from 'react-moving-text';
+import toast, { Toaster } from 'react-hot-toast';
 import 'react-awesome-button/dist/styles.css';
 import './App.css';
 
 
 const title = 'Hey!'
-const tagline = 'Welcome to my website! Check out my stuff below.'
+const tagline = 'Welcome to my website! Check out some stuff below.'
 
 
 const styles = {
@@ -17,21 +18,101 @@ const styles = {
   },
 }
 
+const API_URL = 'https://jservice.io/api/random';
+
+const fetchData = () => {
+  return fetch(API_URL)
+    .then(response => response.json())
+    .then(data => {
+      const question = data[0].question;
+      const answer = data[0].answer;
+      return { question, answer };
+    })
+    .catch(error => console.error(error));
+};
+
+
+
+
+const Cole = () => {
+  
+  const myPromise = fetchData();
+  return (
+    toast.promise(
+      myPromise, 
+      {
+        loading: 'Loading',
+        success: ({question, answer}) => `Question: ${question}\nAnswer: ${answer}`,
+        error: 'Error when fetching',
+      },
+      {
+        style: {
+          minWidth: '250px',
+          fontSize: "20px",
+          backgroundColor: "#de6191",
+          color: "#fdffe5",
+          fontFamily: "Roboto, sans-serif",
+        },
+        success: {
+          duration: 5000,
+        },
+        position: 'top-right',
+      }
+
+    )
+  );
+}
+  
+  
+const explanation = "My name is Ben Schwartz, and you just found the landing page of my website. Please check out my protfolio, it's the only decent thing you'll find here.";
+  
+// const Cole = () => toast.error("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+const Explanation = () => toast(explanation, {
+  style: {
+    minWidth: '250px',
+    fontSize: "20px",
+    backgroundColor: "#6678c5",
+    color: "#fdffe5",
+    fontFamily: "Roboto, sans-serif",
+  },
+  duration: 5000,
+  position: 'top-left',
+});
+
 const buttonData = [
+  {
+    text: 'What?',
+    type: 'secondary',
+    row: 1,
+    toast: Explanation,
+    position: 'top-left',
+
+  },
   {
     text: 'Portfolio',
     link: 'https://btschwartz.com/portfolio/',
-    type: 'primary'
+    type: 'primary',
+    row: 2,
+
   },
   {
     text: 'Resume',
     link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
-    type: 'secondary'
+    type: 'secondary',
+    row: 2,
   },
   {
     text: 'Instagram Clone',
     link: 'https://btschwartz.com/insta',
-    type: 'secondary'
+    type: 'secondary',
+    row: 3,
+  },
+  {
+    text: 'Fun Fact',
+    type: 'danger',
+    row: 4,
+    toast: Cole,
+    position: 'top-right',
   },
   
   
@@ -57,7 +138,6 @@ const types = [
 
 function getRandomType() {
   const randomIndex = Math.floor(Math.random() * types.length);
-  console.log(types[randomIndex]);
   return types[randomIndex];
 }
 
@@ -79,21 +159,47 @@ const MovingElement = ({ element: Element, ...props }) => {
 };
 
 
+
 const Buttons = () => {
-  
+
+  const numRows = Math.max(...buttonData.map(button => button.row));
+  const buttonRows = [];
+
+  for (let i = 1; i <= numRows; i++) {
+    const buttonsInRow = buttonData.filter(button => button.row === i);
+    buttonRows.push(buttonsInRow);
+  }
+
   return (
-    <div className="button-container">
-      {buttonData.map((button, index) => {
-        return (
-          <MovingElement key={index} element={() =>
-            <AwesomeButton type={button.type} target="_blank" href={button.link}>{button.text}</AwesomeButton>}>
-          </MovingElement>
-        )
-      })}
-        
-    </div>
+    <>
+      {buttonRows.map((buttonRow, index) => (
+        <div className={`button-container row-${index+1}`} key={index}>
+          {buttonRow.map((button, buttonIndex) => (
+            <MovingElement key={buttonIndex} element={() =>
+              <>
+              <AwesomeButton
+                type={button.type}
+                target="_blank"
+                href={button.link}
+                onPress={() => {
+                  if (button.toast) {
+                    button.toast();
+                  }
+                }}
+              >
+                {button.text}
+              </AwesomeButton>
+              </>
+            }>
+            </MovingElement>
+          ))}
+        </div>
+      ))}
+    </>
   );
-}
+};
+
+
 
 const Title = () => {
   return (
@@ -121,31 +227,28 @@ const Tagline = () => {
 
 
 const App = () => {
-
-  const {type, num} = getRandomType();
+  const { type, num } = getRandomType();
 
   return (
-    <div className='daylight' style={styles.bg}>
-      <div
-        className='default'
-      >
+    <div className="daylight" style={styles.bg}>
+      <div className="default">
         <main className="App-main">
-          <ParticlesBg 
-            type={type} 
-            // color="#00ffbf"
-            bg={true} 
-            num={num} 
-            
-            />
+          <ParticlesBg type={type} bg={true} num={num} />
           <Title />
           <Tagline />
-          <Buttons />
-
-
+          <Buttons buttons={buttonData}/>
+          <Toaster
+            position={"top-right"}
+            reverseOrder={true}
+            r
+            toastOptions={{
+              duration: 5000,
+            }}
+          />
         </main>
       </div>
     </div>
   );
-}
+};
 
 export default App;
