@@ -56,6 +56,7 @@ const Cole = () => {
         success: {
           duration: 5000,
         },
+        reverseOrder: false,
         position: 'bottom-right',
       }
 
@@ -76,6 +77,7 @@ const Explanation = () => toast(explanation, {
     fontFamily: "Roboto, sans-serif",
   },
   duration: 5000,
+  reverseOrder: true,
   position: 'top-left',
 });
 
@@ -237,14 +239,7 @@ const App = () => {
           <Title />
           <Tagline />
           <Buttons buttons={buttonData}/>
-          <Toaster
-            position={"top-right"}
-            reverseOrder={true}
-            r
-            toastOptions={{
-              duration: 5000,
-            }}
-          />
+          <Toaster />
         </main>
       </div>
     </div>
