@@ -18,15 +18,23 @@ const styles = {
   },
 }
 
-const API_URL = 'https://jservice.io/api/random';
+// const API_URL = 'https://jservice.io/api/random';
+const API_URL = 'https://btschwartz.com/api/joke';
 
 const fetchData = () => {
   return fetch(API_URL)
     .then(response => response.json())
     .then(data => {
-      const question = data[0].question;
-      const answer = data[0].answer;
-      return { question, answer };
+      // const respData = {
+      //   question: data[0].question,
+      //   answer: data[0].answer,
+      // }
+      const respData = {
+        currentTime: data.current_time,
+        joke: data.joke,
+        systemInfo: data.system_info,
+      }
+      return respData;
     })
     .catch(error => console.error(error));
 };
@@ -42,16 +50,31 @@ const Cole = () => {
       myPromise, 
       {
         loading: 'Loading',
-        success: ({question, answer}) => `Question: ${question}\nAnswer: ${answer}`,
+        success: (respData) => {
+          const joke = respData.joke;
+          const currentTime = respData.currentTime;
+          const systemInfo = respData.systemInfo;
+          return (
+            "It's me, the server!\n\n" +
+            systemInfo + "\n\n" +
+            "The time is: " + currentTime + "\n\n" +
+            "Here's a joke: \n\n" + joke
+          )
+        },
+              
+
+        
         error: 'Error when fetching',
       },
       {
         style: {
-          minWidth: '250px',
+          minWidth: "250px",
           fontSize: "20px",
           backgroundColor: "#de6191",
           color: "#fdffe5",
           fontFamily: "Roboto, sans-serif",
+          whiteSpace: "pre-wrap",
+          width: "auto",
         },
         success: {
           duration: 5000,
@@ -110,7 +133,7 @@ const buttonData = [
     row: 3,
   },
   {
-    text: 'Fun Fact',
+    text: 'Hi Server',
     type: 'danger',
     row: 4,
     toast: Cole,
