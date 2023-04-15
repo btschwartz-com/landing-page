@@ -56,7 +56,7 @@ const Cole = () => {
         success: {
           duration: 5000,
         },
-        position: 'top-right',
+        position: 'bottom-right',
       }
 
     )
