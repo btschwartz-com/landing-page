@@ -76,7 +76,7 @@ const Explanation = () => toast(explanation, {
     color: "#fdffe5",
     fontFamily: "Roboto, sans-serif",
   },
-  duration: 5000,
+  duration: 3000,
   reverseOrder: true,
   position: 'top-left',
 });
