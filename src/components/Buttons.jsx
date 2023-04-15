@@ -4,7 +4,7 @@ import React from 'react';
 import { AwesomeButton } from "react-awesome-button";
 import toast from 'react-hot-toast';
 import 'react-awesome-button/dist/styles.css';
-import { MovingElement } from './MovingElement';
+import { MovingElement } from './MovingElement.jsx';
 import '../App.css';
 
 
