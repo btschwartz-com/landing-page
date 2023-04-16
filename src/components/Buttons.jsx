@@ -180,7 +180,7 @@ const FunFact = () => {
               style: styles.toast3,
               success: { duration: 5000 },
               reverseOrder: false,
-              position: 'bottom-right',
+              position: 'top-right',
               
           }
 
