@@ -2,3 +2,4 @@
 
 # Serve wsgi:app with gunicorn on port 8000
 gunicorn --bind localhost:8003 wsgi:app --daemon --name landing-page
+echo "Serving wsgi:app on port 8003"

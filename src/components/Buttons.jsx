@@ -26,7 +26,6 @@ const styles = {
         fontFamily: "Roboto, sans-serif",
         whiteSpace: "pre-wrap",
         width: "auto",
-        img: 'https://drive.google.com/uc?export=view&id=1mlPn2-J0sn1uNOsDrS8fWnpsJNUkOZmK'
     }
 }
 
@@ -73,12 +72,12 @@ const ServerInfo = () => {
                 const currentTime = respData.currentTime;
                 const { os, machine, processor, pythonVersion, nodeName, clientIP } = respData;
                 return (
-                    "It's me, the server!\n\n" +
-                    "My name is " + nodeName + ". " +
+                    "Server:\n\n" +
+                    "Hello, my name is " + nodeName + ". " +
                     'My operating system is ' + os + " " +
                     "and I'm running on a " + machine + " machine " +
                     "with a " + processor + " processor. " +
-                    "I am currently running flask on Python " + pythonVersion + "." +
+                    "I am currently running uWSGI and Flask with Python " + pythonVersion + "." +
                     "\n\n" +
                     "I live in New York, but I think it is " + currentTime + "\n\n" +
                     "I don't know where you live, but your IP address is: " + clientIP
@@ -152,7 +151,7 @@ const Explanation = () => toast(explanation, {
     color: "#fdffe5",
     fontFamily: "Roboto, sans-serif",
   },
-  duration: 3000,
+  duration: 4000,
   reverseOrder: true,
   position: 'top-left',
 });
@@ -164,41 +163,44 @@ const buttonData = [
     row: 1,
     toast: Explanation,
     position: 'top-left',
+    className: 'gray'
 
   },
   {
     text: 'Portfolio',
     link: 'https://btschwartz.com/portfolio/',
-    type: 'primary',
     row: 2,
+    className: 'purple'
 
   },
   {
     text: 'Resume',
     link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
-    type: 'secondary',
     row: 2,
+    className: 'black'
   },
+
   {
     text: 'Instagram Clone',
     link: 'https://btschwartz.com/insta',
-    type: 'secondary',
     row: 3,
+    className: 'gray'
   },
   {
     text: 'Server',
-    type: 'danger',
     row: 4,
     toast: ServerInfo,
     position: 'top-right',
+    className: 'pink'
   },
   {
     text: 'Joke',
-    type: 'danger',
     row: 4,
     toast: Joke,
     position: 'top-right',
+    className: 'green'
   },
+  
 
   
   
@@ -223,10 +225,12 @@ const Buttons = () => {
             {buttonRow.map((button, buttonIndex) => (
               <MovingElement key={buttonIndex} element={() =>
                 <>
+                {console.log(button.colors)}
                 <AwesomeButton
-                  type={button.type}
+                  type='primary'
                   target="_blank"
                   href={button.link}
+                  className={`aws-btn ${button.className}`}
                   onPress={() => {
                     if (button.toast) {
                       button.toast();
