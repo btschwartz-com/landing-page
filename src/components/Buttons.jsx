@@ -26,7 +26,16 @@ const styles = {
         fontFamily: "Roboto, sans-serif",
         whiteSpace: "pre-wrap",
         width: "auto",
-    }
+    },
+    toast3: {
+      minWidth: "250px",
+      fontSize: "20px",
+      backgroundColor: "#fffc6c",
+      color: "#6c6a00",
+      fontFamily: "Roboto, sans-serif",
+      whiteSpace: "pre-wrap",
+      width: "auto",
+    },
 }
 
 
@@ -38,29 +47,28 @@ const explanation = "My name is Ben Schwartz, and you just found the landing pag
 
 
 
-const fetchData = () => {
-    return fetch(API_URL + 'server')
-        .then(response => response.json())
-        .then(data => {
-        const respData = {
-            currentTime: data.current_time,
-            joke: data.joke,
-            os: data.system_info.os,
-            machine: data.system_info.machine,
-            processor: data.system_info.processor,
-            pythonVersion: data.system_info.python_version,
-            nodeName: data.system_info.node_name,
-            clientIP: data.client_ip
-        }
-        return respData;
-        })
-        .catch(error => console.error(error));
-};
 
 
 const ServerInfo = () => {
 
-    
+    const fetchData = () => {
+        return fetch(API_URL + 'server')
+            .then(response => response.json())
+            .then(data => {
+            const respData = {
+                currentTime: data.current_time,
+                joke: data.joke,
+                os: data.system_info.os,
+                machine: data.system_info.machine,
+                processor: data.system_info.processor,
+                pythonVersion: data.system_info.python_version,
+                nodeName: data.system_info.node_name,
+                clientIP: data.client_ip
+            }
+            return respData;
+            })
+            .catch(error => console.error(error));
+    };
 
     const myPromise = fetchData();
     return (
@@ -96,23 +104,23 @@ const ServerInfo = () => {
     );
 }
 
-const fetchData2 = () => {
-    return fetch(API_URL + 'chat/joke')
-        .then(response => response.json())
-        .then(data => {
-        const respData = {
-            joke: data.content
-        }
-        return respData;
-        })
-        .catch(error => console.error(error));
-};
 
 const Joke = () => {
 
-    
+      const fetchData = () => {
+        return fetch(API_URL + 'chat/joke')
+            .then(response => response.json())
+            .then(data => {
+            const respData = {
+                joke: data.content
+            }
+            return respData;
+            })
+            .catch(error => console.error(error));
+    };
+
   
-    const myPromise = fetchData2();
+    const myPromise = fetchData();
     return (
         toast.promise(
             myPromise, 
@@ -137,11 +145,49 @@ const Joke = () => {
         )
     );
 }
-  
 
- 
 
-  
+const FunFact = () => {
+
+    const fetchData = () => {
+      return fetch(API_URL + 'funfact')
+          .then(response => response.json())
+          .then(data => {
+          const respData = {
+              funfact: data.content
+          }
+          return respData;
+          })
+          .catch(error => console.error(error));
+  };
+
+
+  const myPromise = fetchData();
+  return (
+      toast.promise(
+          myPromise, 
+          {
+              loading: 'Loading',
+              success: (respData) => {
+                const fun_fact = respData.funfact;
+                return (
+                    fun_fact
+                )
+              },
+              error: 'Error when fetching',
+          },
+          {
+              style: styles.toast3,
+              success: { duration: 5000 },
+              reverseOrder: false,
+              position: 'bottom-right',
+              
+          }
+
+      )
+  );
+}
+
 // const Cole = () => toast.error("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
 const Explanation = () => toast(explanation, {
   style: {
@@ -162,7 +208,6 @@ const buttonData = [
     type: 'secondary',
     row: 1,
     toast: Explanation,
-    position: 'top-left',
     className: 'gray'
 
   },
@@ -190,15 +235,19 @@ const buttonData = [
     text: 'Server',
     row: 4,
     toast: ServerInfo,
-    position: 'top-right',
     className: 'pink'
   },
   {
     text: 'Joke',
     row: 4,
     toast: Joke,
-    position: 'top-right',
     className: 'green'
+  },
+  {
+    text: 'Fun Fact',
+    row: 4,
+    toast: FunFact,
+    className: 'gold'
   },
   
 
