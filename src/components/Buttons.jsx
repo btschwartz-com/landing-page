@@ -138,7 +138,7 @@ const Joke = () => {
                 style: styles.toast2,
                 success: { duration: 5000 },
                 reverseOrder: false,
-                position: 'bottom-right',
+                position: 'top-right',
                 
             }
 
