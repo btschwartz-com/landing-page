@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 import { AwesomeButton } from "react-awesome-button";
@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import 'react-awesome-button/dist/styles.css';
 import { MovingElement } from './MovingElement.jsx';
 import '../App.css';
+import MyModal from './Modal.jsx';
 
 
 const styles = {
@@ -208,7 +209,7 @@ const buttonData = [
     type: 'secondary',
     row: 1,
     toast: Explanation,
-    className: 'gray'
+    className: 'gold'
 
   },
   {
@@ -235,10 +236,10 @@ const buttonData = [
     text: 'Server',
     row: 4,
     toast: ServerInfo,
-    className: 'pink'
+    className: 'gray'
   },
   {
-    text: 'Joke',
+    text: 'ChatGPT',
     row: 4,
     toast: Joke,
     className: 'green'
@@ -247,7 +248,13 @@ const buttonData = [
     text: 'Fun Fact',
     row: 4,
     toast: FunFact,
-    className: 'gold'
+    className: 'gray'
+  },
+  {
+    text: 'Test',
+    row: 5,
+    modal: true,
+    className: 'gray'
   },
   
 
@@ -258,6 +265,11 @@ const buttonData = [
 
 const Buttons = () => {
 
+    const [show, setShow] = useState(false);
+
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+
     const numRows = Math.max(...buttonData.map(button => button.row));
     const buttonRows = [];
   
@@ -265,6 +277,16 @@ const Buttons = () => {
       const buttonsInRow = buttonData.filter(button => button.row === i);
       buttonRows.push(buttonsInRow);
     }
+
+    const handlePress = (button) => {
+      if (button.toast) {
+        button.toast();
+      }
+      if (button.modal) {
+        handleShow();
+      }
+    }
+
   
     return (
       
@@ -280,11 +302,7 @@ const Buttons = () => {
                   target="_blank"
                   href={button.link}
                   className={`aws-btn ${button.className}`}
-                  onPress={() => {
-                    if (button.toast) {
-                      button.toast();
-                    }
-                  }}
+                  onPress={() => handlePress(button)}
                 >
                   {button.text}
                 </AwesomeButton>
@@ -294,6 +312,7 @@ const Buttons = () => {
             ))}
           </div>
         ))}
+        <MyModal show={show} handleClose={handleClose} />
       </>
     );
   };

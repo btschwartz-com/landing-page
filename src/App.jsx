@@ -3,11 +3,13 @@ import React from 'react';
 import ParticlesBg from 'particles-bg';
 
 import { Toaster } from 'react-hot-toast';
-import 'react-awesome-button/dist/styles.css';
-import './App.css';
+
+
 
 import { MovingElement } from './components/MovingElement.jsx';
 import Buttons from './components/Buttons.jsx';
+import './App.css';
+import 'react-awesome-button/dist/styles.css';
 
 
 const title = 'Hey!'
@@ -83,8 +85,11 @@ const App = () => {
           <Tagline />
           <Buttons />
           <Toaster />
+          
         </main>
+
       </div>
+      
     </div>
   );
 };
