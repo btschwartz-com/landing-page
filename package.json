@@ -18,7 +18,8 @@
     "react-hot-toast": "^2.4.0",
     "react-moving-text": "^0.0.7",
     "react-scripts": "^5.0.1",
-    "style-loader": "^3.3.2"
+    "style-loader": "^3.3.2",
+    "styled-components": "^5.3.9"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -5,8 +5,9 @@ import { AwesomeButton } from "react-awesome-button";
 import toast from 'react-hot-toast';
 import 'react-awesome-button/dist/styles.css';
 import { MovingElement } from './MovingElement.jsx';
+
+// import MyModal from './Modal.jsx';
 import '../App.css';
-import MyModal from './Modal.jsx';
 
 
 const styles = {
@@ -253,7 +254,9 @@ const buttonData = [
   {
     text: 'Test',
     row: 5,
-    modal: true,
+    modal: {
+      url: 'https://btschwartz.com/ap1/v1/chat',
+    },
     className: 'gray'
   },
   
@@ -292,7 +295,7 @@ const Buttons = () => {
       
       <>
         {buttonRows.map((buttonRow, index) => (
-          <div className={`button-container row-${index+1}`} key={index}>
+          <div className={`my-button-container row-${index+1}`} key={index}>
             {buttonRow.map((button, buttonIndex) => (
               <MovingElement key={buttonIndex} element={() =>
                 <>
@@ -312,7 +315,7 @@ const Buttons = () => {
             ))}
           </div>
         ))}
-        <MyModal show={show} handleClose={handleClose} />
+        {/* <MyModal show={show} handleClose={handleClose} /> */}
       </>
     );
   };

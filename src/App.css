@@ -14,7 +14,7 @@
   font-size: calc(10px + 2vmin);
 }
 
-.container{
+.my-container{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -26,7 +26,7 @@
   max-width: 80%;
 }
 
-.container-blank {
+.my-container-blank {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -434,24 +434,24 @@ body {
 
 
 
-.button-container {
+.my-button-container {
   display: flex;
   justify-content: center;
 }
 
-.button-container .aws-btn {
+.my-button-container .aws-btn {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 25px;
 }
 
 @media (max-width: 600px) {
-  .button-container {
+  .my-button-container {
     flex-direction: column;
     align-items: center;
   }
 
-  .button-container .aws-btn {
+  .my-button-container .aws-btn {
     margin-top: 10px;
     margin-bottom: 10px;
   }
@@ -521,25 +521,4 @@ body {
   --button-primary-color-hover: #fffb3e;
   --button-primary-color-active: #e6e100;
   --button-primary-border: none;
-}
-
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-inner {
-  background-color: white;
-  padding: 20px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }

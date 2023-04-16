@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ParticlesBg from 'particles-bg';
+
 
 import { Toaster } from 'react-hot-toast';
 
@@ -10,6 +10,7 @@ import { MovingElement } from './components/MovingElement.jsx';
 import Buttons from './components/Buttons.jsx';
 import './App.css';
 import 'react-awesome-button/dist/styles.css';
+import ParticlesBg from 'particles-bg';
 
 
 const title = 'Hey!'
@@ -50,7 +51,7 @@ function getRandomType() {
 
 const Title = () => {
   return (
-    <div className="container">
+    <div className="my-container">
       <MovingElement type='fadeIn' element={() => 
         <h1 className='intro'>{title}</h1>}>
       </MovingElement>      
@@ -62,7 +63,7 @@ const Title = () => {
 
 const Tagline = () => {
   return (
-    <div className="container">
+    <div className="my-container">
       <MovingElement type='fadeIn' element={() => 
         <div className="tagline">
           {tagline}
@@ -78,9 +79,11 @@ const App = () => {
 
   return (
     <div className="daylight" style={styles.bg}>
-      <div className="default">
+      <div className="default" >
         <main className="App-main">
-          <ParticlesBg type={type} bg={true} num={num} />
+          <ParticlesBg type={type} bg={true} num={num} 
+          styles={{backgroundColor: 'black'}}
+          />
           <Title />
           <Tagline />
           <Buttons />
