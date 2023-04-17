@@ -60,6 +60,11 @@ const Tagline = () => {
           {tagline}
         </div>}>
       </MovingElement> 
+      <MovingElement type='fadeIn' element={() => 
+        <div className="tagline-small">
+          Sorry if you are viewing this on a smaller screen, the style will be updated soon!
+        </div>}>
+      </MovingElement> 
     </div>
   );
 }
