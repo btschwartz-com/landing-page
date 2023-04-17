@@ -470,9 +470,9 @@ body {
 .aws-btn.green {
   --button-primary-color: #19c37d;
   --button-primary-color-dark: #14935e;
-  --button-primary-color-light: #d3fac5;
-  --button-primary-color-hover: #23c717;
-  --button-primary-color-active: #7cbe2d;
+  --button-primary-color-light: black;
+  --button-primary-color-hover: #11e18a;
+  --button-primary-color-active: #19c37d;
   --button-primary-border: 2px solid #19c37d;
 }
 
