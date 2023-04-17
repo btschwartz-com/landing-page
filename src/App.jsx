@@ -25,18 +25,9 @@ const styles = {
 
 
 const types = [
-  {
-    'type': 'circle',
-    'num': 4
-  },
-  {
-    'type': 'square',
-    'num': 6
-  },
-  {
-    'type': 'thick',
-    'num': 40
-  },
+  // { 'type': 'circle', 'num': 4 },
+  // { 'type': 'square', 'num': 6 },
+  { 'type': 'thick', 'num': 40 },
 ]
 
 
@@ -79,6 +70,7 @@ const App = () => {
 
   return (
     <div className="daylight" style={styles.bg}>
+
       <div className="default" >
         <main className="App-main">
           <ParticlesBg type={type} bg={true} num={num} 

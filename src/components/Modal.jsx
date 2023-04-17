@@ -1,57 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import styled from 'styled-components';
-import bootstrapStyles from 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const BootstrapWrapper = styled.div`
-  ${bootstrapStyles};
-`;
+function MyModal({ show, handleClose, onSubmit }) {
+    const [inputValue, setInputValue] = useState('');
 
+    const handleSubmit = () => {
+        onSubmit(inputValue);
+        handleClose();
+    };
 
-function MyModal ( { show, handleClose } ) {
-
-
-  return (
-    <>
-        <BootstrapWrapper>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="name@example.com"
-                                autoFocus
-                            />
-                        </Form.Group>
-                        <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
-                        >
-                            <Form.Label>Example textarea</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                    Save Changes
-                </Button>
-                </Modal.Footer>
-            </Modal>
-        </BootstrapWrapper>
-    </>
-  );
+    return (
+        <>
+        <Modal show={show} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+            <Modal.Title>Ask ChatGPT (gpt-3.5-turbo)</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <Form>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Label>Use $0.000002 of my own money to ask ChatGPT whatever you want! Place your prompt below:</Form.Label>
+                <Form.Control
+                    as="textarea"
+                    rows={3}
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                />
+                </Form.Group>
+                <Form.Label>Be aware, longer responses are not fully supported.</Form.Label>
+            </Form>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+                Close
+            </Button>
+            <Button variant="primary" onClick={handleSubmit}>
+                Submit
+            </Button>
+            </Modal.Footer>
+        </Modal>
+        </>
+    );
 }
-
 
 export default MyModal;

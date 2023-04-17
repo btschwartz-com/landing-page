@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import 'react-awesome-button/dist/styles.css';
 import { MovingElement } from './MovingElement.jsx';
 
-// import MyModal from './Modal.jsx';
+import MyModal from './Modal.jsx';
 import '../App.css';
 
 
@@ -77,23 +77,24 @@ const ServerInfo = () => {
         toast.promise(
             myPromise, 
             {
-                loading: 'Loading',
+                loading: 'Asking...',
                 success: (respData) => {
                 const currentTime = respData.currentTime;
                 const { os, machine, processor, pythonVersion, nodeName, clientIP } = respData;
                 return (
                     "Server:\n\n" +
-                    "Hello, my name is " + nodeName + ". " +
-                    'My operating system is ' + os + " " +
-                    "and I'm running on a " + machine + " machine " +
-                    "with a " + processor + " processor. " +
-                    "I am currently running uWSGI and Flask with Python " + pythonVersion + "." +
+                    "Hey, it's me, the server! I've been told my name is " + nodeName + ". " +
+                    "I am a KVM virtual machine, " +
+                    " running a " + os + " operating system with a " + processor + " processor. " +
+                    "I am currently running uWSGI and Flask with Python " + pythonVersion +
+                    " to serve this website!" +
                     "\n\n" +
-                    "I live in New York, but I think it is " + currentTime + "\n\n" +
-                    "I don't know where you live, but your IP address is: " + clientIP
+                    "My hardware lives in New York, and I think it is " + currentTime + "\n\n" +
+                    "I don't know where you live, but I do know your IP address: " + clientIP + "." +
+                    "\n\n" + "Nice to meet you!"
                 )
                 },
-                error: 'Error when fetching',
+                error: 'Request failed :(',
             },
             {
                 style: styles.toast1,
@@ -106,47 +107,6 @@ const ServerInfo = () => {
     );
 }
 
-
-const Joke = () => {
-
-      const fetchData = () => {
-        return fetch(API_URL + 'chat/joke')
-            .then(response => response.json())
-            .then(data => {
-            const respData = {
-                joke: data.content
-            }
-            return respData;
-            })
-            .catch(error => console.error(error));
-    };
-
-  
-    const myPromise = fetchData();
-    return (
-        toast.promise(
-            myPromise, 
-            {
-                loading: 'Loading',
-                success: (respData) => {
-                const joke = respData.joke;
-                return (
-                    "ChatGPT:\n\n" + joke
-                )
-                },
-                error: 'Error when fetching',
-            },
-            {
-                style: styles.toast2,
-                success: { duration: 5000 },
-                reverseOrder: false,
-                position: 'top-right',
-                
-            }
-
-        )
-    );
-}
 
 
 const FunFact = () => {
@@ -190,7 +150,6 @@ const FunFact = () => {
   );
 }
 
-// const Cole = () => toast.error("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
 const Explanation = () => toast(explanation, {
   style: {
     minWidth: '250px',
@@ -203,6 +162,60 @@ const Explanation = () => toast(explanation, {
   reverseOrder: true,
   position: 'top-left',
 });
+
+
+const AskChatGPT = (prompt) => {
+
+  const gptFetch = (prompt) => {
+    return fetch('https://btschwartz.com/api/v1/chat/ask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        question: prompt,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const respData = {
+          answer: data.content
+        }
+        return respData;
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error('Error:', error);
+      });
+  };
+
+
+  const myPromise = gptFetch(prompt);
+  return (
+      toast.promise(
+          myPromise, 
+          {
+              loading: 'Loading',
+              success: (respData) => {
+              const answer = respData.answer;
+              return (
+                  "ChatGPT:\n\n" + answer
+              )
+              },
+              error: 'Error when fetching',
+          },
+          {
+              style: styles.toast2,
+              success: { duration: 5000 },
+              reverseOrder: false,
+              position: 'top-right',
+              
+          }
+
+      )
+  );
+}
+
 
 const buttonData = [
   {
@@ -230,40 +243,34 @@ const buttonData = [
   {
     text: 'Instagram Clone',
     link: 'https://btschwartz.com/insta',
-    row: 3,
+    row: 4,
     className: 'gray'
   },
   {
     text: 'Server',
-    row: 4,
+    row: 5,
     toast: ServerInfo,
     className: 'gray'
   },
   {
-    text: 'ChatGPT',
-    row: 4,
-    toast: Joke,
+    text: 'Ask ChatGPT',
+    row: 3,
+    modal: true, // Specific to chatGPT button
     className: 'green'
   },
   {
     text: 'Fun Fact',
-    row: 4,
+    row: 5,
     toast: FunFact,
     className: 'gray'
   },
-  {
-    text: 'Test',
-    row: 5,
-    modal: {
-      url: 'https://btschwartz.com/ap1/v1/chat',
-    },
-    className: 'gray'
-  },
-  
-
-  
-  
 ]
+
+
+
+
+
+
 
 
 const Buttons = () => {
@@ -299,7 +306,6 @@ const Buttons = () => {
             {buttonRow.map((button, buttonIndex) => (
               <MovingElement key={buttonIndex} element={() =>
                 <>
-                {console.log(button.colors)}
                 <AwesomeButton
                   type='primary'
                   target="_blank"
@@ -315,7 +321,8 @@ const Buttons = () => {
             ))}
           </div>
         ))}
-        {/* <MyModal show={show} handleClose={handleClose} /> */}
+        {/* For now this is just specific to the Ask ChatGPT button */}
+        <MyModal show={show} handleClose={handleClose} onSubmit={AskChatGPT}/>
       </>
     );
   };
