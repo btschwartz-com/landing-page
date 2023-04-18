@@ -7,7 +7,7 @@ import 'react-awesome-button/dist/styles.css';
 import { MovingElement } from './MovingElement.jsx';
 
 import MyModal from './Modal.jsx';
-import '../App.css';
+import '../styles/App.css';
 
 
 const styles = {

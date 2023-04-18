@@ -4,7 +4,7 @@ import React from 'react';
 
 import MovingComponent from 'react-moving-text';
 import 'react-awesome-button/dist/styles.css';
-import '../App.css';
+import '../styles/App.css';
 
 
 export const MovingElement = ({ element: Element, ...props }) => {

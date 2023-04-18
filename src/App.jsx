@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 
@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast';
 
 import { MovingElement } from './components/MovingElement.jsx';
 import Buttons from './components/Buttons.jsx';
-import './App.css';
+import './styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
 
@@ -25,8 +25,8 @@ const styles = {
 
 
 const types = [
-  // { 'type': 'circle', 'num': 4 },
-  // { 'type': 'square', 'num': 6 },
+  { 'type': 'circle', 'num': 4 },
+  { 'type': 'square', 'num': 6 },
   { 'type': 'thick', 'num': 40 },
 ]
 
@@ -53,21 +53,33 @@ const Title = () => {
 
 
 const Tagline = () => {
+  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000); // Update every 1000ms (1 second)
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <div className="my-container">
-      <MovingElement type='fadeIn' element={() => 
+      <MovingElement type='fadeIn' element={() =>
         <div className="tagline">
           {tagline}
         </div>}>
-      </MovingElement> 
-      <MovingElement type='fadeIn' element={() => 
+      </MovingElement>
+      <MovingElement type='fadeIn' element={() =>
         <div className="tagline-small">
-          Sorry if you are viewing this on a smaller screen, the style will be updated soon!
+          {currentTime}
         </div>}>
-      </MovingElement> 
+      </MovingElement>
     </div>
   );
-}
+};
 
 
 const App = () => {

@@ -5,7 +5,7 @@ import ParticlesBg from 'particles-bg';
 import { AwesomeButton } from "react-awesome-button";
 import MovingComponent from 'react-moving-text';
 import 'react-awesome-button/dist/styles.css';
-import './App.css';
+import './styles/App.css';
 
 
 const title = '404 :('

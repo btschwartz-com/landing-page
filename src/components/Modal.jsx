@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/bootstrap.css';
 
 function MyModal({ show, handleClose, onSubmit }) {
     const [inputValue, setInputValue] = useState('');
@@ -14,7 +14,8 @@ function MyModal({ show, handleClose, onSubmit }) {
 
     return (
         <>
-        <Modal show={show} onHide={handleClose} centered>
+        <Modal show={show} onHide={handleClose} centered
+        scrollable>
             <Modal.Header closeButton>
             <Modal.Title>Ask ChatGPT (gpt-3.5-turbo)</Modal.Title>
             </Modal.Header>
