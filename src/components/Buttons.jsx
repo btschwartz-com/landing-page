@@ -80,25 +80,25 @@ const ServerInfo = () => {
                 loading: 'Asking...',
                 success: (respData) => {
                 const currentTime = respData.currentTime;
-                const { os, machine, processor, pythonVersion, nodeName, clientIP } = respData;
+                const { os, processor, pythonVersion, nodeName, clientIP } = respData;
                 return (
                     "Server:\n\n" +
                     "Hey, it's me, the server! I've been told my name is " + nodeName + ". " +
                     "I am a KVM virtual machine, " +
-                    " running a " + os + " operating system with a " + processor + " processor. " +
+                    " running a Ubuntu 20.04 " + os + " operating system with a " + processor + " processor. " +
                     "I am currently running uWSGI and Flask with Python " + pythonVersion +
                     " to serve this website!" +
                     "\n\n" +
                     "My hardware lives in New York, and I think it is " + currentTime + "\n\n" +
                     "I don't know where you live, but I do know your IP address: " + clientIP + "." +
-                    "\n\n" + "Nice to meet you!"
+                    "\n\nNice to meet you!"
                 )
                 },
                 error: 'Request failed :(',
             },
             {
                 style: styles.toast1,
-                success: { duration: 5000 },
+                success: { duration: 7000 },
                 reverseOrder: false,
                 position: 'bottom-right',
             }
@@ -206,13 +206,33 @@ const AskChatGPT = (prompt) => {
           },
           {
               style: styles.toast2,
-              success: { duration: 5000 },
+              success: { duration: 8000 },
               reverseOrder: false,
               position: 'top-right',
               
           }
 
       )
+  );
+}
+
+
+const TestToast = () => {
+  return (
+    toast((t) => (
+      <span>
+        Custom and <b>bold</b>
+        <AwesomeButton 
+        onPress={() => toast.dismiss(t.id)}
+        className="aws-btn small">
+          Dismiss
+        </AwesomeButton>
+      </span>
+    ),
+    {
+      duration: 10000,
+    }
+    )
   );
 }
 
@@ -264,6 +284,12 @@ const buttonData = [
     toast: FunFact,
     className: 'gray'
   },
+  {
+    text: 'Test Toast',
+    row: 6,
+    toast: TestToast,
+    className: 'gray'
+  },
 ]
 
 
@@ -275,8 +301,8 @@ const buttonData = [
 
 const Buttons = () => {
 
+    // just for the modal
     const [show, setShow] = useState(false);
-
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 

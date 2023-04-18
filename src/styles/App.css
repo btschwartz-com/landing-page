@@ -535,3 +535,17 @@ body {
   --button-primary-color-active: #e6e100;
   --button-primary-border: none;
 }
+
+
+.aws-btn.small {
+  --button-default-height: 76px;
+  --button-default-font-size: 10px;
+  --button-default-border-radius: 10px;
+  --button-horizontal-padding: 36px;
+  --button-primary-color: #fffc6c;
+  --button-primary-color-dark: #b9b500;
+  --button-primary-color-light: #6c6a00;
+  --button-primary-color-hover: #fffb3e;
+  --button-primary-color-active: #e6e100;
+  --button-primary-border: none;
+}
