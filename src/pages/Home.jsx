@@ -11,7 +11,8 @@ import Buttons from '../components/Buttons.jsx';
 import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Explanation, TestToast } from '../misc/Toasts.jsx'
+import LoginModal from '../misc/LoginModal.jsx';
 
 const title = 'Hey!'
 const tagline = 'Welcome to my website! Check out some stuff below.'
@@ -22,10 +23,9 @@ const styles = {
   },
 }
 
-
-
-
-
+const handleSuccess = () => {
+  window.location.href = '/vip';
+};
 
 
 function getRandomType() {
@@ -37,6 +37,45 @@ function getRandomType() {
   const randomIndex = Math.floor(Math.random() * types.length);
   return types[randomIndex];
 }
+
+const buttonData = [
+  {
+    text: 'What?',
+    type: 'secondary',
+    row: 1,
+    toast: Explanation,
+    className: 'gold'
+
+  },
+  {
+    text: 'Portfolio',
+    link: 'https://btschwartz.com/portfolio/',
+    row: 2,
+    className: 'purple'
+
+  },
+  {
+    text: 'Resume',
+    link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
+    row: 2,
+    className: 'black'
+  },
+
+  {
+    text: 'Test Toast',
+    row: 6,
+    toast: TestToast,
+    className: 'gray'
+  },
+  {
+    text: 'VIP',
+    row: 6,
+    modalId: 'vip',
+    modal: LoginModal,
+    modalProps: { onSuccess: () => handleSuccess()},
+    className: 'pink'
+  },
+]
 
 
 const Title = () => {
@@ -80,7 +119,7 @@ const Tagline = () => {
 };
 
 
-const App = () => {
+const Home = () => {
   const { type, num } = getRandomType();
 
   return (
@@ -93,7 +132,7 @@ const App = () => {
           />
           <Title />
           <Tagline />
-          <Buttons />
+          <Buttons buttonData={buttonData}/>
           <Toaster />
           
         </main>
@@ -104,4 +143,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;

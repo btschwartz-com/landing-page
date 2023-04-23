@@ -5,84 +5,12 @@ import { AwesomeButton } from "react-awesome-button";
 import 'react-awesome-button/dist/styles.css';
 import { MovingElement } from './MovingElement.jsx';
 
-import ChatGPTModal from './ChatGPTModal.jsx';
-import { useNavigate } from 'react-router-dom';
 import '../styles/App.css';
-import { ServerInfo, FunFact, Explanation, AskChatGPT, TestToast } from './Toasts.jsx'
 
 
 
-
-
-const buttonData = [
-  {
-    text: 'What?',
-    type: 'secondary',
-    row: 1,
-    toast: Explanation,
-    className: 'gold'
-
-  },
-  {
-    text: 'Portfolio',
-    link: 'https://btschwartz.com/portfolio/',
-    row: 2,
-    className: 'purple'
-
-  },
-  {
-    text: 'Resume',
-    link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
-    row: 2,
-    className: 'black'
-  },
-
-  {
-    text: 'Instagram Clone',
-    link: 'https://btschwartz.com/insta',
-    row: 4,
-    className: 'gray'
-  },
-  {
-    text: 'Server',
-    row: 5,
-    toast: ServerInfo,
-    className: 'gray'
-  },
-  {
-    text: 'Ask ChatGPT',
-    row: 3,
-    modalId: 'chatGPT',
-    modal: ChatGPTModal, // Replace with your specific modal component
-    modalProps: { onSubmit: AskChatGPT }, // Pass any additional props your modal might need
-    className: 'green'
-  },
-  {
-    text: 'Fun Fact',
-    row: 5,
-    toast: FunFact,
-    className: 'gray'
-  },
-  {
-    text: 'Test Toast',
-    row: 6,
-    toast: TestToast,
-    className: 'gray'
-  },
-  {
-    text: 'VIP',
-    row: 6,
-    toast: TestToast,
-    className: 'pink'
-  },
-]
-
-
-
-
-const Buttons = () => {
+const Buttons = ({ buttonData }) => {
   const [modalStates, setModalStates] = useState({});
-  const navigate = useNavigate();
 
   const handleShow = (modalId) => {
     setModalStates((prevState) => ({ ...prevState, [modalId]: true }));
@@ -99,12 +27,11 @@ const Buttons = () => {
     if (button.modal) {
       handleShow(button.modalId);
     }
+    if (button.handleClick) {
+      button.handleClick();
+    }
   };
 
-  const handleLoginSuccess = ({ username, password }) => {
-    console.log('Successful login:', { username, password });
-    navigate('/vip');
-  };
 
   const renderButtons = (buttonRow) =>
     buttonRow.map((button) => (
