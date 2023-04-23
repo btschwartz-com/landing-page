@@ -1,108 +1,16 @@
-import React, { useState, useEffect } from 'react';
-
-
-
-import { Toaster } from 'react-hot-toast';
-
-
-
-import { MovingElement } from './components/MovingElement.jsx';
-import Buttons from './components/Buttons.jsx';
-import './styles/App.css';
-import 'react-awesome-button/dist/styles.css';
-import ParticlesBg from 'particles-bg';
-
-
-const title = 'Hey!'
-const tagline = 'Welcome to my website! Check out some stuff below.'
-
-
-const styles = {
-  bg: {
-  },
-}
-
-
-
-const types = [
-  { 'type': 'circle', 'num': 4 },
-  { 'type': 'square', 'num': 6 },
-  { 'type': 'thick', 'num': 40 },
-]
-
-
-
-function getRandomType() {
-  const randomIndex = Math.floor(Math.random() * types.length);
-  return types[randomIndex];
-}
-
-
-
-
-const Title = () => {
-  return (
-    <div className="my-container">
-      <MovingElement type='fadeIn' element={() => 
-        <h1 className='intro'>{title}</h1>}>
-      </MovingElement>      
-    </div>
-  );
-}
-
-
-
-const Tagline = () => {
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString());
-    }, 1000); // Update every 1000ms (1 second)
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  return (
-    <div className="my-container">
-      <MovingElement type='fadeIn' element={() =>
-        <div className="tagline">
-          {tagline}
-        </div>}>
-      </MovingElement>
-      <MovingElement type='fadeIn' element={() =>
-        <div className="tagline-small">
-          {currentTime}
-        </div>}>
-      </MovingElement>
-    </div>
-  );
-};
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import VIP from './pages/VIP';
 
 const App = () => {
-  const { type, num } = getRandomType();
-
   return (
-    <div className="daylight" style={styles.bg}>
-
-      <div className="default" >
-        <main className="App-main">
-          <ParticlesBg type={type} bg={true} num={num} 
-          styles={{backgroundColor: 'black'}}
-          />
-          <Title />
-          <Tagline />
-          <Buttons />
-          <Toaster />
-          
-        </main>
-
-      </div>
-      
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/vip" element={<VIP />} />
+      </Routes>
+    </Router>
   );
 };
 

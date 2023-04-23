@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import '../styles/bootstrap.css';
 
-function MyModal({ show, handleClose, onSubmit }) {
+function ChatGPTModal({ show, handleClose, onSubmit }) {
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = () => {
@@ -46,4 +46,4 @@ function MyModal({ show, handleClose, onSubmit }) {
     );
 }
 
-export default MyModal;
+export default ChatGPTModal;

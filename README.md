@@ -1,24 +1,11 @@
-# SN-Landing-Page    
+TODO
 
-### DEMO is [here](https://nordicgiant2.github.io/snlp-page/)
+1. Make it so that toasts can be dismissed
+2. Add register/login functionality? Nah
+3. Upload posts
+4. Get API on socket along with others
+5. Create build for 500 error page
 
-![img](https://github.com/nordicgiant2/sn-landing-page/blob/master/image/01.jpg?raw=true)
 
-# About [`particles-bg`](https://github.com/lindelof/particles-bg) library
-#### This project uses the react particle background component library [https://github.com/lindelof/particles-bg](https://github.com/lindelof/particles-bg). It's very simple. Anyone can be a Musketeer with it.
-
-![img](https://github.com/lindelof/particles-bg/raw/master/image/01.jpg?raw=true)
-
-## Run Project
-### 1. Clone the project
-
-### 2. Run the project
-```shell
-npm i
-npm start
-```
-
-### 3. BUild
-```shell
-npm run build
-```
+Make it so login success hook is handled correctly but cant be put in buttton data
+flask session time
