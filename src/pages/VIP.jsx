@@ -13,6 +13,7 @@ import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
 import { ServerInfo, FunFact, Explanation, AskChatGPT } from '../misc/Toasts.jsx'
 import ChatGPTModal from '../misc/ChatGPTModal.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const title = 'B)'
 const tagline = 'Welcome to the VIP section! Check out some stuff below.'
@@ -117,7 +118,16 @@ const Tagline = () => {
 };
 
 
-const VIP = () => {
+const VIP = ({ accessToken }) => {
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   console.log(accessToken);
+  //   if (!accessToken) {
+  //     navigate('/');
+  //   }
+  // }, [accessToken, navigate]);
+
 
   return (
     <div className="daylight" style={styles.bg}>

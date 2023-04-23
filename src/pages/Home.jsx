@@ -23,11 +23,6 @@ const styles = {
   },
 }
 
-const handleSuccess = () => {
-  window.location.href = '/vip';
-};
-
-
 function getRandomType() {
   const types = [
     { 'type': 'circle', 'num': 4 },
@@ -38,44 +33,36 @@ function getRandomType() {
   return types[randomIndex];
 }
 
-const buttonData = [
-  {
-    text: 'What?',
-    type: 'secondary',
-    row: 1,
-    toast: Explanation,
-    className: 'gold'
+const handleSuccess = () => {
+  window.location.href = '/vip';
+};
+// return fetch('https://btschwartz.com/api/v1/chat/ask', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ 
+//         question: prompt,
+//       }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         const respData = {
+//           answer: data.content
+//         }
+//         return respData;
+//       })
+//       .catch((error) => {
+//         // Handle errors
+//         console.error('Error:', error);
+//       });
 
-  },
-  {
-    text: 'Portfolio',
-    link: 'https://btschwartz.com/portfolio/',
-    row: 2,
-    className: 'purple'
 
-  },
-  {
-    text: 'Resume',
-    link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
-    row: 2,
-    className: 'black'
-  },
 
-  {
-    text: 'Test Toast',
-    row: 6,
-    toast: TestToast,
-    className: 'gray'
-  },
-  {
-    text: 'VIP',
-    row: 6,
-    modalId: 'vip',
-    modal: LoginModal,
-    modalProps: { onSuccess: () => handleSuccess()},
-    className: 'pink'
-  },
-]
+
+
+
+
 
 
 const Title = () => {
@@ -119,7 +106,80 @@ const Tagline = () => {
 };
 
 
-const Home = () => {
+const Home = ( { setAccessToken } ) => {
+
+
+  const onLoginAttempt = ({ username, password }) => {
+    // make a request to localhost:5000/login
+    console.log(username, password);
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          }),
+        })
+        .then((response) => {
+          if (!response.ok) {
+            return false;
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // data should have 'access_token'
+          setAccessToken(data.access_token);
+          return true;
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error('Error:', error);
+        });
+  };
+
+
+  const buttonData = [
+    {
+      text: 'What?',
+      row: 1,
+      toast: Explanation,
+      className: 'gold'
+  
+    },
+    {
+      text: 'Portfolio',
+      link: 'https://btschwartz.com/portfolio/',
+      row: 2,
+      className: 'purple'
+  
+    },
+    {
+      text: 'Resume',
+      link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
+      row: 2,
+      className: 'black'
+    },
+  
+    {
+      text: 'Test Toast',
+      row: 6,
+      toast: TestToast,
+      className: 'gray'
+    },
+    {
+      text: 'VIP',
+      row: 6,
+      modalId: 'vip',
+      modal: LoginModal,
+      modalProps: { 
+        onSuccess: () => handleSuccess(),
+        onSubmit: (username, password) => onLoginAttempt(username, password),},
+      className: 'pink'
+    },
+  ]
+
   const { type, num } = getRandomType();
 
   return (

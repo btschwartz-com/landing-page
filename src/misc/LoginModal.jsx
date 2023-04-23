@@ -5,7 +5,39 @@ import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import '../styles/bootstrap.css';
 
-function LoginModal({ show, handleClose, onSuccess }) {
+
+/*
+
+const AskChatGPT = (prompt) => {
+
+  const gptFetch = (prompt) => {
+    return fetch('https://btschwartz.com/api/v1/chat/ask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        question: prompt,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const respData = {
+          answer: data.content
+        }
+        return respData;
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error('Error:', error);
+      });
+  };
+*/
+
+
+
+
+function LoginModal({ show, handleClose, onSubmit, onSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -15,20 +47,19 @@ function LoginModal({ show, handleClose, onSuccess }) {
     setSubmitting(true);
     setErrorMessage('');
 
-    // Simulate an async operation like API call
-    setTimeout(() => {
-      // Simulate a 50% chance of successful login
-      const success = Math.random() > 0.5;
+    const successfulLogin = onSubmit({ username, password });
 
-      if (success) {
-        onSuccess({ username, password });
-        setSubmitting(false);
-        handleClose();
-      } else {
-        setErrorMessage('Invalid username or password.');
-        setSubmitting(false);
-      }
-    }, 1000);
+    console.log('successfulLogin', successfulLogin);
+
+    if (successfulLogin) {
+      onSuccess();
+      setSubmitting(false);
+      handleClose();
+    }
+    else {
+      setErrorMessage('Invalid username or password.');
+      setSubmitting(false);
+    }
   };
 
   return (
