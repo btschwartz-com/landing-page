@@ -108,7 +108,7 @@ const Tagline = () => {
 
 const Home = ( { setAccessToken } ) => {
 
-
+  // HERE get it so it can be tested, right now localhost is just not working
   const onLoginAttempt = ({ username, password }) => {
     // make a request to localhost:5000/login
     console.log(username, password);
