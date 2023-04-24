@@ -9,3 +9,7 @@ TODO
 
 Make it so login success hook is handled correctly but cant be put in buttton data
 flask session time
+
+
+
+1. Make it so that I can webpack all three, have them all served by flask

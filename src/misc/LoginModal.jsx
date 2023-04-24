@@ -6,61 +6,60 @@ import Alert from 'react-bootstrap/Alert';
 import '../styles/bootstrap.css';
 
 
-/*
-
-const AskChatGPT = (prompt) => {
-
-  const gptFetch = (prompt) => {
-    return fetch('https://btschwartz.com/api/v1/chat/ask', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        question: prompt,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const respData = {
-          answer: data.content
-        }
-        return respData;
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error('Error:', error);
-      });
-  };
-*/
 
 
 
 
-function LoginModal({ show, handleClose, onSubmit, onSuccess }) {
+function LoginModal({ show, handleClose, setAccessToken, onSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+
   const handleSubmit = () => {
     setSubmitting(true);
     setErrorMessage('');
-
-    const successfulLogin = onSubmit({ username, password });
-
-    console.log('successfulLogin', successfulLogin);
-
-    if (successfulLogin) {
-      onSuccess();
-      setSubmitting(false);
-      handleClose();
-    }
-    else {
-      setErrorMessage('Invalid username or password.');
-      setSubmitting(false);
-    }
+  
+    fetch('http://127.0.0.1:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            setErrorMessage('Invalid username or password');
+          }
+          else {
+            setErrorMessage('Something went wrong :(');
+          }
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // setAccessToken(data.access_token);
+        
+        setSubmitting(false); // Moved inside the then block
+        handleClose();
+      })
+      .then(() => {
+        onSuccess();
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error(error);
+        setSubmitting(false); // Moved inside the catch block
+      });
   };
+  
+
 
   return (
     <>

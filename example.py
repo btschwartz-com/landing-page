@@ -15,6 +15,7 @@ users = [
 
 @app.route('/login', methods=['POST'])
 def login():
+    print('bruh')
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
@@ -22,7 +23,7 @@ def login():
     password = request.json.get('password', None)
     
     user = next((user for user in users if user["username"] == username and user["password"] == password), None)
-    
+    print(str(username) + ' ' + str(password))
     if user is None:
         return jsonify({"msg": "Invalid username or password"}), 401
 
