@@ -10,7 +10,7 @@ import '../styles/bootstrap.css';
 
 
 
-function LoginModal({ show, handleClose, setAccessToken, onSuccess }) {
+function LoginModal({ show, handleClose, onSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -20,43 +20,44 @@ function LoginModal({ show, handleClose, setAccessToken, onSuccess }) {
   const handleSubmit = () => {
     setSubmitting(true);
     setErrorMessage('');
+
+    onSuccess();
   
-    fetch('http://127.0.0.1:5000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          if (response.status === 401) {
-            setErrorMessage('Invalid username or password');
-          }
-          else {
-            setErrorMessage('Something went wrong :(');
-          }
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // setAccessToken(data.access_token);
+    // fetch('http://127.0.0.1:5000/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     username: username,
+    //     password: password,
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       if (response.status === 401) {
+    //         setErrorMessage('Invalid username or password');
+    //       }
+    //       else {
+    //         setErrorMessage('Something went wrong :(');
+    //       }
+    //       throw new Error(response.status);
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
         
-        setSubmitting(false); // Moved inside the then block
-        handleClose();
-      })
-      .then(() => {
-        onSuccess();
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error(error);
-        setSubmitting(false); // Moved inside the catch block
-      });
+    //     setSubmitting(false); // Moved inside the then block
+    //     handleClose();
+    //   })
+    //   .then(() => {
+    //     onSuccess();
+    //   })
+    //   .catch((error) => {
+    //     // Handle errors
+    //     console.error(error);
+    //     setSubmitting(false); // Moved inside the catch block
+    //   });
   };
   
 

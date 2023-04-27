@@ -84,7 +84,6 @@ const Tagline = () => {
 
 
 const Home = () => {
-  // setAccessToken('piprt')
 
 
   const buttonData = [
@@ -122,7 +121,6 @@ const Home = () => {
       modal: LoginModal,
       modalProps: { 
         onSuccess: () => handleSuccess(),
-        // setAccessToken: setAccessToken,
         // onSubmit: (username, password) => onLoginAttempt(username, password),
       },
       className: 'pink'

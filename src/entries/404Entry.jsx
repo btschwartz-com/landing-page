@@ -1,13 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import './styles/index.css';
-import App from './App.jsx';
-import ErrorPage from './404.jsx';
-import * as serviceWorker from './serviceWorker.jsx';
+import '../styles/index.css';
+import * as serviceWorker from '../serviceWorker.jsx';
+import ErrorPage from '../pages/404.jsx';
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<App tab="home" />);
+root.render(<ErrorPage />);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
