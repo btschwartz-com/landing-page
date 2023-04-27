@@ -45,6 +45,18 @@ const buttonData = [
     className: 'gray'
   },
   {
+    text: 'Waltuh Game',
+    link: 'https://btschwartz.com/waltuh/',
+    row: 2,
+    className: 'gray'
+  },
+  {
+    text: 'Dogs',
+    link: 'https://btschwartz.com/pics/',
+    row: 4,
+    className: 'blue'
+  },
+  {
     text: 'Server',
     row: 5,
     toast: ServerInfo,
@@ -125,8 +137,12 @@ const VIP = () => {
 
       <div className="default" >
         <main className="App-main">
-          <ParticlesBg type='ball' color='#000000' bg={true} num={4}
-          styles={{backgroundColor: 'black'}}
+          <ParticlesBg 
+                type="tadpole"
+                color="#ffe100"
+                bg={true} 
+                num={6} 
+                styles={{backgroundColor: 'black'}}
           />
           <Title />
           <Tagline />

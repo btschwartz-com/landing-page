@@ -21,43 +21,41 @@ function LoginModal({ show, handleClose, onSuccess }) {
     setSubmitting(true);
     setErrorMessage('');
 
-    onSuccess();
-  
-    // fetch('http://127.0.0.1:5000/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     username: username,
-    //     password: password,
-    //   }),
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       if (response.status === 401) {
-    //         setErrorMessage('Invalid username or password');
-    //       }
-    //       else {
-    //         setErrorMessage('Something went wrong :(');
-    //       }
-    //       throw new Error(response.status);
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            setErrorMessage('Invalid username or password');
+          }
+          else {
+            setErrorMessage('Something went wrong :(');
+          }
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
         
-    //     setSubmitting(false); // Moved inside the then block
-    //     handleClose();
-    //   })
-    //   .then(() => {
-    //     onSuccess();
-    //   })
-    //   .catch((error) => {
-    //     // Handle errors
-    //     console.error(error);
-    //     setSubmitting(false); // Moved inside the catch block
-    //   });
+        setSubmitting(false); // Moved inside the then block
+        handleClose();
+      })
+      .then(() => {
+        onSuccess();
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error(error);
+        setSubmitting(false); // Moved inside the catch block
+      });
   };
   
 

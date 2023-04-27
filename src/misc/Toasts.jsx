@@ -156,7 +156,7 @@ const Explanation = () => toast(explanation, {
     color: "#fdffe5",
     fontFamily: "Roboto, sans-serif",
   },
-  duration: 4000,
+  duration: 4500,
   reverseOrder: true,
   position: 'top-left',
 });
@@ -234,5 +234,20 @@ const TestToast = () => {
   );
 }
 
+const more = "Please be patient, more is coming soon!"
 
-export { ServerInfo, FunFact, Explanation, AskChatGPT, TestToast } 
+const More = () => toast(more, {
+  style: {
+    minWidth: '250px',
+    fontSize: "20px",
+    backgroundColor: "#848289",
+    color: "#ffffff",
+    fontFamily: "Roboto, sans-serif",
+  },
+  duration: 4500,
+  reverseOrder: true,
+  position: 'bottom-left',
+});
+
+
+export { ServerInfo, FunFact, Explanation, AskChatGPT, TestToast, More } 

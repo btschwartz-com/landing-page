@@ -1,15 +1,16 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import VIP from './pages/VIP';
-import ErrorPage from './pages/404.jsx';
-
-const CurrentPage = Home; // Can be Home, VIP, or ErrorPage
 
 const App = () => {
   return (
-    <div>
-      <CurrentPage />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/vip" element={<VIP />} />
+      </Routes>
+    </Router>
   );
 };
 

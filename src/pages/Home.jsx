@@ -11,7 +11,7 @@ import Buttons from '../components/Buttons.jsx';
 import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
-import { Explanation, TestToast } from '../misc/Toasts.jsx'
+import { Explanation, More, TestToast } from '../misc/Toasts.jsx'
 import LoginModal from '../misc/LoginModal.jsx';
 
 const title = 'Hey!'
@@ -109,9 +109,9 @@ const Home = () => {
     },
   
     {
-      text: 'Test Toast',
+      text: 'More',
       row: 6,
-      toast: TestToast,
+      toast: More,
       className: 'gray'
     },
     {
@@ -121,7 +121,6 @@ const Home = () => {
       modal: LoginModal,
       modalProps: { 
         onSuccess: () => handleSuccess(),
-        // onSubmit: (username, password) => onLoginAttempt(username, password),
       },
       className: 'pink'
     },
