@@ -555,3 +555,127 @@ body {
   position: relative;
   z-index: 1;
 }
+
+
+.sample-enter {
+  opacity: 0;
+}
+
+.sample-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.sample-exit {
+  opacity: 1;
+}
+
+.sample-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+.sample-enter-done {
+  opacity: 1;
+}
+
+.sample-exit-done {
+  opacity: 0;
+}
+
+.slow-slide-fade-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.slow-slide-fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms ease-in, transform 750ms ease-in;
+}
+
+.slow-slide-fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slow-slide-fade-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 500ms ease-in, transform 750ms ease-in;
+}
+
+.slow-slide-fade-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slow-slide-fade-exit-done {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.cool-slow-fade-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.cool-slow-fade-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1000ms ease-in, transform 1000ms ease-in;
+}
+
+.cool-slow-fade-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cool-slow-fade-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1000ms ease-in, transform 1000ms ease-in;
+}
+
+.cool-slow-fade-enter-done {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cool-slow-fade-exit-done {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.almost-fade-out-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.almost-fade-out-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1000ms ease-in, transform 1000ms ease-in;
+}
+
+.almost-fade-out-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.almost-fade-out-exit-active {
+  opacity: 0.1;
+  transform: scale(0.9);
+  transition: opacity 1000ms ease-in, transform 1000ms ease-in;
+}
+
+.almost-fade-out-enter-done {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.almost-fade-out-exit-done {
+  opacity: 0.1;
+  transform: scale(0.9);
+}
+

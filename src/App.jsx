@@ -9,7 +9,6 @@ import { RouterProvider } from 'react-router-dom';
 import Home from './pages/Home.jsx'
 import More from './pages/More.jsx'
 import './styles/App.css'
-import 'animate.css'
 
 const routes = [
   { path: '/', name: 'Home', element: <Home />, nodeRef: createRef() },
@@ -31,7 +30,7 @@ export const AppRoutes = () => {
             key={location.pathname}
             nodeRef={nodeRef}
             timeout={400}
-            classNames="animate__backOutDown"
+            classNames="almost-fade-out"
             unmountOnExit
           >
             {(state) => (

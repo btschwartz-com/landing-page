@@ -155,14 +155,14 @@ const Home = () => {
 
       <div className="default" >
         <main className="App-main">
-          <ParticlesBg type={type} bg={true} num={num} 
-          styles={{backgroundColor: 'black'}}
-          />
+          
           <Title />
           <Tagline />
           <Buttons buttonData={buttonData}/>
           <Toaster />
-          
+          <ParticlesBg type={type} bg={true} num={num} 
+          styles={{backgroundColor: 'black'}}
+          />
         </main>
 
       </div>

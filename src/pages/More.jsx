@@ -11,8 +11,6 @@ import Buttons from '../components/Buttons.jsx';
 import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
-import { Explanation } from '../misc/Toasts.jsx'
-import MyParticles from '../components/MyParticles.jsx';
 
 const title = 'More?'
 const tagline = "Bruh, you really want more? Hang tight, I'm working on it.";
@@ -23,16 +21,6 @@ const styles = {
   },
 }
 
-function getRandomType() {
-  const types = [
-    // { 'type': 'circle', 'num': 4 },
-    // { 'type': 'square', 'num': 6 },
-    // { 'type': 'thick', 'num': 40 },
-    { 'type': 'ball', 'num': 1 },
-  ]
-  const randomIndex = Math.floor(Math.random() * types.length);
-  return types[randomIndex];
-}
 
 
   
@@ -93,7 +81,6 @@ const MorePage = () => {
 
   ]
 
-  const { type, num } = getRandomType();
 
   return (
     <div className="daylight" style={styles.bg}>
