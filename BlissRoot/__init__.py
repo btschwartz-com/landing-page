@@ -16,6 +16,7 @@ def serve_static(path):
     return flask.send_from_directory('static', path)
 
 @app.route('/')
+@app.route('/more')
 def index():
     return flask.render_template('index.html')
 

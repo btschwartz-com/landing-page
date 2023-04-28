@@ -549,3 +549,9 @@ body {
   --button-primary-color-active: #e6e100;
   --button-primary-border: none;
 }
+
+
+.overlay-content {
+  position: relative;
+  z-index: 1;
+}

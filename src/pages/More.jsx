@@ -12,6 +12,7 @@ import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
 import { Explanation } from '../misc/Toasts.jsx'
+import MyParticles from '../components/MyParticles.jsx';
 
 const title = 'MOAR!'
 const tagline = 'Bruh, you really want more? Fine, here you go.'
@@ -39,7 +40,7 @@ function getRandomType() {
 
 const Title = () => {
   return (
-    <div className="my-container">
+    <div className="my-container overlay-content">
       <MovingElement type='fadeIn' element={() => 
         <h1 className='intro'>{title}</h1>}>
       </MovingElement>      
@@ -62,7 +63,7 @@ const Tagline = () => {
   }, []);
 
   return (
-    <div className="my-container">
+    <div className="my-container overlay-content">
       <MovingElement type='fadeIn' element={() =>
         <div className="tagline">
           {tagline}
@@ -105,9 +106,10 @@ const MorePage = () => {
 
       <div className="default" >
         <main className="App-main">
-          <ParticlesBg type={type} bg={true} num={num} 
+          {/* <ParticlesBg type={type} bg={true} num={num} 
           styles={{backgroundColor: 'black'}}
-          />
+          /> */}
+          <MyParticles />
           <Title />
           <Tagline />
           <Buttons buttonData={buttonData}/>
