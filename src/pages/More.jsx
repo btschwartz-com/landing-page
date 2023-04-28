@@ -76,6 +76,7 @@ const MorePage = () => {
       text: 'Return Home',
       row: 1,
       navLink: '/',
+      link: '/',
       className: 'blue',
     },
 

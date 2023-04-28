@@ -133,7 +133,9 @@ const Home = () => {
       text: 'More',
       row: 6,
       className: 'gray',
-      navLink: '/more'
+      navLink: '/more',
+      link: '/more'
+
     },
     {
       text: 'VIP',

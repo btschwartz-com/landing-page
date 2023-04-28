@@ -39,13 +39,11 @@ const Buttons = ({ buttonData }) => {
     buttonRow.map((button) => {
       const handleClick = (event) => {
         
-        if (button.navLink) {
-          alert('navlink')
-          event.stopPropagation();
-          event.preventDefault();
-        }
+        // if (button.navLink) {
+        //   event.stopPropagation();
+        //   event.preventDefault();
+        // }
         handlePress(button);
-        alert('bro')
 
       };
 
