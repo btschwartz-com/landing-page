@@ -11,7 +11,7 @@ import Buttons from '../components/Buttons.jsx';
 import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
-import { Explanation, More, TestToast } from '../misc/Toasts.jsx'
+import { Explanation } from '../misc/Toasts.jsx'
 import LoginModal from '../misc/LoginModal.jsx';
 
 const title = 'Hey!'
@@ -33,12 +33,33 @@ function getRandomType() {
   return types[randomIndex];
 }
 
+const handleLoginClick = () => {
+  // Access /logged_in_user to check if the user is logged in
+  // will return 200 if logged in, 401 if not
+  fetch('/is_logged_in')
+    .then((response) => {
+      if (!response.ok) {
+        return false;
+      }
+      return true;
+    })
+    .then((logged_in) => {
+      if (logged_in) {
+        handleSuccess();
+      }
+    })
+    .catch((error) => {
+      // Don't do anything, the user is not logged in
+    });
+  
+};
+
 const handleSuccess = () => {
   window.location.href = '/vip';
 };
 
 
-  
+
 
 
 
@@ -111,14 +132,15 @@ const Home = () => {
     {
       text: 'More',
       row: 6,
-      toast: More,
-      className: 'gray'
+      className: 'gray',
+      navLink: '/more'
     },
     {
       text: 'VIP',
       row: 6,
       modalId: 'vip',
       modal: LoginModal,
+      handleClick: () => handleLoginClick(),
       modalProps: { 
         onSuccess: () => handleSuccess(),
       },

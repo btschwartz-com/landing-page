@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { AwesomeButton } from "react-awesome-button";
 import 'react-awesome-button/dist/styles.css';
 import { MovingElement } from './MovingElement.jsx';
+import { NavLink } from 'react-router-dom';
 
 import '../styles/App.css';
 
@@ -24,32 +25,52 @@ const Buttons = ({ buttonData }) => {
     if (button.toast) {
       button.toast();
     }
-    if (button.modal) {
-      handleShow(button.modalId);
-    }
     if (button.handleClick) {
       button.handleClick();
     }
+    if (button.modal) {
+      handleShow(button.modalId);
+    }
+    
   };
 
 
   const renderButtons = (buttonRow) =>
-    buttonRow.map((button) => (
-      <MovingElement key={button.text} element={() =>
-        <>
-          <AwesomeButton
-            type='primary'
-            target="_blank"
-            href={button.link}
-            className={`aws-btn ${button.className}`}
-            onPress={() => handlePress(button)}
-          >
-            {button.text}
-          </AwesomeButton>
-        </>
-      }>
-      </MovingElement>
-    ));
+    buttonRow.map((button) => {
+      const handleClick = (event) => {
+        if (button.navLink) {
+          event.preventDefault();
+        }
+        handlePress(button);
+      };
+
+      const buttonContent = (
+        <AwesomeButton
+          type='primary'
+          target={button.navLink ? undefined : '_blank'}
+          href={button.link}
+          className={`aws-btn ${button.className}`}
+          onPress={handleClick}
+        >
+          {button.text}
+        </AwesomeButton>
+      );
+
+      return (
+        <MovingElement key={button.text} element={() => (
+          <>
+            {button.navLink ? (
+              <NavLink to={button.navLink}>
+                {buttonContent}
+              </NavLink>
+            ) : (
+              buttonContent
+            )}
+          </>
+        )}>
+        </MovingElement>
+      );
+    });
 
   const renderModals = () =>
     buttonData.filter(button => button.modal).map(button => (

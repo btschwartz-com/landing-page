@@ -11,8 +11,7 @@ import Buttons from '../components/Buttons.jsx';
 import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
-import { Explanation, More, TestToast } from '../misc/Toasts.jsx'
-import LoginModal from '../misc/LoginModal.jsx';
+import { Explanation } from '../misc/Toasts.jsx'
 
 const title = 'MOAR!'
 const tagline = 'Bruh, you really want more? Fine, here you go.'
@@ -32,10 +31,6 @@ function getRandomType() {
   const randomIndex = Math.floor(Math.random() * types.length);
   return types[randomIndex];
 }
-
-const handleSuccess = () => {
-  window.location.href = '/vip';
-};
 
 
   
@@ -93,7 +88,14 @@ const MorePage = () => {
       toast: Explanation,
       className: 'gold'
   
-    }
+    },
+    {
+      text: 'Home',
+      row: 1,
+      navLink: '/',
+      className: 'blue',
+    },
+
   ]
 
   const { type, num } = getRandomType();

@@ -60,6 +60,15 @@ def login():
         return flask.jsonify({'result': 'success'}), 200
     else:
         return flask.jsonify({'result': 'error', 'message': 'Invalid username or password'}), 401
+    
+
+@app.route('/is_logged_in')
+def is_logged_in():
+    username = logged_in_user()
+    if username is None:
+        return flask.jsonify({'result': 'error', 'message': 'Not logged in'}), 401
+    else:
+        return flask.jsonify({'result': 'success'}), 200
 
 
 if __name__ == "__main__":

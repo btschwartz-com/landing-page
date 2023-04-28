@@ -57,7 +57,8 @@ function LoginModal({ show, handleClose, onSuccess }) {
         setSubmitting(false); // Moved inside the catch block
       });
   };
-  
+
+
 
 
   return (
