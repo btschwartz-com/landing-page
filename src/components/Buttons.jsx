@@ -40,10 +40,12 @@ const Buttons = ({ buttonData }) => {
       const handleClick = (event) => {
         
         if (button.navLink) {
+          alert('navlink')
           event.stopPropagation();
           event.preventDefault();
         }
         handlePress(button);
+        alert('bro')
 
       };
 
