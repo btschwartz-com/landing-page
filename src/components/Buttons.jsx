@@ -38,10 +38,13 @@ const Buttons = ({ buttonData }) => {
   const renderButtons = (buttonRow) =>
     buttonRow.map((button) => {
       const handleClick = (event) => {
+        
         if (button.navLink) {
+          event.stopPropagation();
           event.preventDefault();
         }
         handlePress(button);
+
       };
 
       const buttonContent = (

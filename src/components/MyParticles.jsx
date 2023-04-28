@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
+import { loadFireworksPreset } from "tsparticles-preset-fireworks";
 
 const MyParticles = () => {
     const particlesInit = useCallback(async engine => {
@@ -8,12 +9,17 @@ const MyParticles = () => {
         // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
         // starting from v2 you can add only the features you need reducing the bundle size
-        await loadFull(engine);
+        // await loadFull(engine);
+        
     }, []);
 
     const particlesLoaded = useCallback(async container => {
         await console.log(container);
     }, []);
+
+    const options = {
+        preset: "fireworks",
+      };
 
     return (
         <Particles
@@ -97,3 +103,27 @@ const MyParticles = () => {
     );
 };
 export default MyParticles;
+
+
+
+/*
+import Particles from "react-particles";
+import type { Engine } from "tsparticles-engine";
+import { loadFireworksPreset } from "tsparticles-preset-fireworks";
+
+export class ParticlesContainer extends React.PureComponent<IProps> {
+  // this customizes the component tsParticles installation
+  async customInit(engine: Engine): Promise<void> {
+    // this adds the preset to tsParticles, you can safely use the
+    await loadFireworksPreset(engine);
+  }
+
+  render() {
+    const options = {
+      preset: "fireworks",
+    };
+
+    return <Particles options={options} init={this.customInit} />;
+  }
+}
+*/
