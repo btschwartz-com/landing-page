@@ -97,13 +97,6 @@ const MorePage = () => {
 
 
   const buttonData = [
-    
-    {
-      text: 'Instagram Clone',
-      link: 'https://btschwartz.com/insta',
-      row: 2,
-      className: 'gray'
-    },
     {
       text: 'My Dogs',
       link: 'https://btschwartz.com/pics/',
@@ -117,14 +110,28 @@ const MorePage = () => {
       className: 'gold'
     },
     {
-      text: 'Hello Server',
+      text: 'Instagram Clone',
+      link: 'https://btschwartz.com/insta',
+      row: 2,
+      className: 'gray'
+    },
+    {
+      text: 'Chat with GPT',
+      link: 'https://chat.btschwartz.com',
       row: 3,
+      className: 'green'
+    },
+
+    
+    {
+      text: 'Hello Server',
+      row: 4,
       toast: ServerInfo,
       className: 'gray'
     },
     {
       text: 'Return Home',
-      row: 4,
+      row: 5,
       navLink: '/',
       link: '/',
       className: 'blue',
