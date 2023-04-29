@@ -8,11 +8,13 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { RouterProvider } from 'react-router-dom';
 import Home from './pages/Home.jsx'
 import More from './pages/More.jsx'
+import VIP from './pages/VIP.jsx'
 import './styles/App.css'
 
 const routes = [
   { path: '/', name: 'Home', element: <Home />, nodeRef: createRef() },
   { path: '/more', name: 'More', element: <More />, nodeRef: createRef() },
+  { path: '/VIP', name: 'VIP', element: <VIP />, nodeRef: createRef() },
 
 ]
 
