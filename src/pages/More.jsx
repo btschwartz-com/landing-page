@@ -13,6 +13,7 @@ import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
 import { FunFact, ServerInfo } from '../misc/Toasts.jsx';
 import ImageGenModal from '../misc/ImageGenModal.jsx';
+import ConversationModal from '../misc/ConvoModal.jsx';
 
 const title = 'More?'
 const tagline = "Bruh, you really want more? Hang tight, I'm working on it.";
@@ -133,6 +134,8 @@ const MorePage = () => {
       text: 'Image Generator',
       row: 2,
       modal: ImageGenModal,
+      modalId: 'imageGenModal',
+
       className: 'pink'
 
     },
@@ -143,6 +146,7 @@ const MorePage = () => {
       link: '/',
       className: 'blue',
     },
+
 
 
   ]

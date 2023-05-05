@@ -1,0 +1,178 @@
+import React, { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
+import '../styles/bootstrap.css';
+
+
+
+
+function ConversationModal({ show, handleClose, apiURL }) {
+    const [inputValue, setInputValue] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorAlert, setErrorAlert] = useState(null);
+    const [accessToken, setAccessToken] = useState('');
+
+    useEffect(() => {
+        setMessages([
+            { type: 'user', text: 'Hello, Chatbot!' },
+            { type: 'bot', text: 'Hello! How can I help you today?' }
+          ]);
+    }, []);
+
+    const handleAccessTokenChange = (event) => {
+        setAccessToken(event.target.value);
+    };
+
+
+    const handleClearConversation = () => {
+        if (window.confirm('Are you sure you want to clear the entire conversation?')) {
+            setMessages([]);
+        }
+    };
+
+    const handleSubmit = () => {
+
+        if (inputValue === '' || accessToken === '') {
+            return;
+        }
+
+        setIsSubmitting(true);
+        setErrorAlert(null);
+        const newMessages = [...messages, { type: 'user', text: inputValue }];
+        setMessages(newMessages);
+
+        const formData = new FormData();
+        formData.append('access_token', accessToken); // Append the access token to formData
+        formData.append('prev_messages', JSON.stringify(newMessages));
+
+
+        fetch(apiURL, {
+            method: 'POST',
+            body: formData,
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status === 403) { // Check for a 403 status
+                    throw Error('Forbidden');
+                } else {
+                    throw Error(response.statusText);
+                }
+            })
+            .then((data) => {
+                const resp = data.content;
+                newMessages.push({ type: 'bot', text: resp });
+                setMessages(newMessages);
+                setInputValue('');
+            })
+            .catch((error) => {
+                if (error.message === 'Forbidden') {
+                    setErrorAlert('Access denied. Please check your access token.');
+                } else {
+                    setErrorAlert('Error generating message');
+                }
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+            });
+    };
+
+    return (
+        <Modal show={show} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>GPT-4 Conversation</Modal.Title>
+            </Modal.Header>
+            <Form.Group
+                className="mb-3"
+                controlId="accessToken"
+                style={{ marginLeft: '16px', marginRight: '16px' }}
+            >
+                <Form.Label>Sorry, I gotta do this:</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter access token"
+                    value={accessToken}
+                    onChange={handleAccessTokenChange}
+                />
+            </Form.Group>
+            <Modal.Body>
+                <div
+                    className="chat-container"
+                    style={{
+                        maxHeight: '300px',
+                        overflowY: 'auto',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '8px',
+                    }}
+                >
+                    {messages.map((message, index) => (
+                        <div
+                            key={index}
+                            className={`message ${message.type}`}
+                            style={{
+                                alignSelf: message.type !== 'user' ? 'flex-start' : 'flex-end',
+                                backgroundColor:
+                                    message.type === 'user' ? '#cce5ff' : '#adb5bd',
+                                borderRadius: '12px',
+                                padding: '6px 12px',
+                                marginBottom: '4px',
+                                maxWidth: '70%',
+                            }}
+                        >
+                            {message.text}
+                        </div>
+                    ))}
+                </div>
+                {isSubmitting && (
+                    <div className="text-center">
+                        <Spinner animation="grow" variant="primary" size="sm" />
+                        <Spinner animation="grow" variant="primary" size="sm" />
+                        <Spinner animation="grow" variant="primary" size="sm" />
+                    </div>
+                )}
+            <Form>
+                
+            </Form>
+            </Modal.Body>
+            {errorAlert && <Alert variant="danger">{errorAlert}</Alert>}
+            <Modal.Footer>
+                
+                <Form.Control
+                    type="text"
+                    placeholder="Type your message..."
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleSubmit();
+                        }
+                    }}
+                />
+                
+                <Button variant="danger" onClick={handleClearConversation}>
+                    Clear
+                </Button>
+                <Button
+                    variant={isSubmitting ? "secondary" : "primary"}
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                >
+                    Send
+                </Button>
+                {/* <Button variant="secondary" onClick={handleClose}>
+                    Close and Save
+                </Button> */}
+            </Modal.Footer>
+            
+        </Modal>
+    );
+}
+
+export default ConversationModal;

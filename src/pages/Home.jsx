@@ -13,6 +13,7 @@ import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
 import { Explanation } from '../misc/Toasts.jsx'
 import LoginModal from '../misc/LoginModal.jsx';
+import ConversationModal from '../misc/ConvoModal.jsx';
 
 const title = 'Hey!'
 const tagline = 'Welcome to my website! Check out some stuff below.'
@@ -127,6 +128,16 @@ const Home = () => {
       link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
       row: 2,
       className: 'black'
+    },
+    {
+      text: 'GPT-4 Convo',
+      modal: ConversationModal,
+      modalId: 'convo',
+      modalProps: {
+        apiURL: 'https://btschwartz.com/api/v1/chat/convo',
+      },
+      row: 3,
+      className: 'green'
     },
   
     {

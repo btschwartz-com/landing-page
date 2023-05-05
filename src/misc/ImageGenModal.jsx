@@ -51,6 +51,7 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
                 console.log(data)
                 const image_url = data.url;
                 handleImageSubmit(image_url);
+                setInputValue('');
                 handleClose();
             })
             .catch((error) => {
