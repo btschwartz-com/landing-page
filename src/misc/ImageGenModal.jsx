@@ -76,7 +76,7 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
         <Modal show={show} onHide={handleClose} centered
         scrollable>
             <Modal.Header closeButton>
-            <Modal.Title>Ask ChatGPT (gpt-3.5-turbo)</Modal.Title>
+            <Modal.Title>OpenAI Image Generator</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <Form>
