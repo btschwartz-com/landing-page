@@ -12,8 +12,6 @@ import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
 import { FunFact, ServerInfo } from '../misc/Toasts.jsx';
-import ImagePicker from '../misc/FilePickerModal.jsx';
-import ChatGPTModal from '../misc/ChatGPTModal.jsx';
 import ImageGenModal from '../misc/ImageGenModal.jsx';
 
 const title = 'More?'
@@ -67,7 +65,6 @@ const Tagline = () => {
         const respData = {
           message: data.content,
         };
-        console.log(respData);
         setFetchedMessage(respData.message);
         clearTimeout(timeoutId);
       })
@@ -101,7 +98,7 @@ const MorePage = () => {
 
   const buttonData = [
     {
-      text: 'My Dogs',
+      text: 'Pics',
       link: 'https://btschwartz.com/pics/',
       row: 1,
       className: 'purple'
@@ -115,7 +112,7 @@ const MorePage = () => {
     {
       text: 'Instagram Clone',
       link: 'https://btschwartz.com/insta',
-      row: 2,
+      row: 6,
       className: 'gray'
     },
     {
@@ -133,15 +130,15 @@ const MorePage = () => {
       className: 'gray'
     },
     {
-      text: 'What?',
-      row: 7,
+      text: 'Image Generator',
+      row: 2,
       modal: ImageGenModal,
       className: 'pink'
 
     },
     {
       text: 'Return Home',
-      row: 5,
+      row: 7,
       navLink: '/',
       link: '/',
       className: 'blue',

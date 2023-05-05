@@ -13,6 +13,17 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
     const [accessToken, setAccessToken] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorAlert, setErrorAlert] = useState(null);
+    const [showImageModal, setShowImageModal] = useState(false);
+    const [imageURL, setImageURL] = useState('');
+
+    const handleImageModalClose = () => {
+        setShowImageModal(false);
+    };
+    
+    const handleImageSubmit = (image_url) => {
+        setImageURL(image_url);
+        setShowImageModal(true);
+    };
 
 
     const handleSubmit = () => {
@@ -39,7 +50,7 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
             .then((data) => {
                 console.log(data)
                 const image_url = data.url;
-                onSubmit(image_url);
+                handleImageSubmit(image_url);
                 handleClose();
             })
             .catch((error) => {
@@ -99,6 +110,19 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
                     disabled={isSubmitting}
                     >
                     {isSubmitting ? 'Submitting...' : 'Submit'}
+                </Button>
+            </Modal.Footer>
+        </Modal>
+        <Modal show={showImageModal} onHide={handleImageModalClose} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>Generated Image</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <img src={imageURL} alt="Generated" style={{ width: '100%' }} />
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleImageModalClose}>
+                    Close
                 </Button>
             </Modal.Footer>
         </Modal>
