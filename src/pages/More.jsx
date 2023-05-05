@@ -146,7 +146,16 @@ const MorePage = () => {
       link: '/',
       className: 'blue',
     },
-
+    {
+      text: 'GPT-4 Omega Convo',
+      row: 3,
+      modal: ConversationModal,
+      modalProps: {
+        apiURL: 'https://btschwartz.com/api/v1/chat/danconvo',
+      },
+      modalId: 'convoModal',
+      className: 'gray',
+    }
 
 
   ]
