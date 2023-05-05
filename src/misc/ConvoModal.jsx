@@ -162,7 +162,7 @@ function ConversationModal({ show, handleClose, apiURL }) {
                 <Button
                     variant={isSubmitting ? "secondary" : "primary"}
                     onClick={handleSubmit}
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || inputValue === '' || accessToken === ''}
                 >
                     Send
                 </Button>
