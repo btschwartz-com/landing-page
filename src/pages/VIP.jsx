@@ -11,7 +11,7 @@ import Buttons from '../components/Buttons.jsx';
 import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
-import { Explanation, AskChatGPT } from '../misc/Toasts.jsx'
+import { Explanation, AskChatGPT, TestToast } from '../misc/Toasts.jsx'
 import ChatGPTModal from '../misc/ChatGPTModal.jsx';
 
 const title = 'B)'
@@ -34,6 +34,14 @@ const buttonData = [
     type: 'secondary',
     row: 1,
     toast: Explanation,
+    className: 'gold'
+
+  },
+  {
+    text: 'Test',
+    type: 'secondary',
+    row: 5,
+    toast: TestToast,
     className: 'gold'
 
   },

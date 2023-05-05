@@ -12,6 +12,9 @@ import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
 import { FunFact, ServerInfo } from '../misc/Toasts.jsx';
+import ImagePicker from '../misc/FilePickerModal.jsx';
+import ChatGPTModal from '../misc/ChatGPTModal.jsx';
+import ImageGenModal from '../misc/ImageGenModal.jsx';
 
 const title = 'More?'
 const tagline = "Bruh, you really want more? Hang tight, I'm working on it.";
@@ -130,12 +133,20 @@ const MorePage = () => {
       className: 'gray'
     },
     {
+      text: 'What?',
+      row: 7,
+      modal: ImageGenModal,
+      className: 'pink'
+
+    },
+    {
       text: 'Return Home',
       row: 5,
       navLink: '/',
       link: '/',
       className: 'blue',
     },
+
 
   ]
 
