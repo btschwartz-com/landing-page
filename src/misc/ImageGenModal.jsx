@@ -30,7 +30,7 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
         setIsSubmitting(true);
         setErrorAlert(null);
         const formData = new FormData();
-        formData.append('access_token', accessToken); // Append the access token to formData
+        formData.append('access_token', 'robby13'); // Append the access token to formData
         formData.append('prompt', inputValue);
 
 
@@ -89,14 +89,14 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
                     onChange={(e) => setInputValue(e.target.value)}
                 />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="accessToken">
+                {/* <Form.Group className="mb-3" controlId="accessToken">
                         <Form.Label>Access Token:</Form.Label>
                         <Form.Control
                             type="text"
                             value={accessToken}
                             onChange={handleAccessTokenChange}
                         />
-                </Form.Group>
+                </Form.Group> */}
             </Form>
             {errorAlert && <Alert variant="danger">{errorAlert}</Alert>}
             </Modal.Body>
