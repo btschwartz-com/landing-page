@@ -14,6 +14,7 @@ import ParticlesBg from 'particles-bg';
 import { FunFact, ServerInfo } from '../misc/Toasts.jsx';
 import ImageGenModal from '../misc/ImageGenModal.jsx';
 import ConversationModal from '../misc/ConvoModal.jsx';
+import { AwesomeButton } from "react-awesome-button";
 
 const title = 'More?'
 const tagline = "Bruh, you really want more? Hang tight, I'm working on it.";
@@ -41,6 +42,7 @@ const Title = () => {
 }
 
 
+
 const Tagline = () => {
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
   const [fetchedMessage, setFetchedMessage] = useState(null);
@@ -55,7 +57,7 @@ const Tagline = () => {
     };
   }, []);
 
-  useEffect(() => {
+  const fetchTagline = () => {
     const timeoutId = setTimeout(() => {
       setFetchedMessage(tagline);
     }, 5000); // Fallback to 'tagline' after 5 seconds
@@ -77,18 +79,35 @@ const Tagline = () => {
     return () => {
       clearTimeout(timeoutId);
     };
+  };
+
+  useEffect(() => {
+    fetchTagline();
   }, []);
 
   return (
     <div className="my-container overlay-content">
       {fetchedMessage && (
+        <>
         <MovingElement type="fadeIn" element={() => (
           <div className="tagline">{fetchedMessage}</div>
         )}></MovingElement>
+        <AwesomeButton
+          className='aws-btn small'
+          onPress={fetchTagline}
+          style={{ marginBottom: '1rem' }}
+        >
+          <i className="fas fa-sync-alt"></i>
+        </AwesomeButton>
+        </>
+        
+        
       )}
+      
       <MovingElement type="fadeIn" element={() => (
         <div className="tagline-small">{currentTime}</div>
       )}></MovingElement>
+      
     </div>
   );
 };

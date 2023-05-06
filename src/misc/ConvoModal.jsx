@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -15,18 +15,33 @@ function ConversationModal({ show, handleClose, apiURL }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorAlert, setErrorAlert] = useState(null);
     const [accessToken, setAccessToken] = useState('');
+    const abortControllerRef = useRef(null);
 
     useEffect(() => {
         setMessages([
             { type: 'user', text: 'Hello, Chatbot!' },
             { type: 'bot', text: 'Hello! How can I help you today?' }
           ]);
+        return () => {
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort(); // Cancel the fetch request when the component is unmounted
+            }
+        };
     }, []);
 
     const handleAccessTokenChange = (event) => {
         setAccessToken(event.target.value);
     };
 
+
+    const onClose = () => {
+        if (abortControllerRef.current) {
+            setErrorAlert(null);
+            setInputValue('');
+            abortControllerRef.current.abort(); // Cancel the fetch request when the modal is closed
+        }
+        handleClose();
+    };
 
     const handleClearConversation = () => {
         if (window.confirm('Are you sure you want to clear the entire conversation?')) {
@@ -40,10 +55,12 @@ function ConversationModal({ show, handleClose, apiURL }) {
             return;
         }
 
+        abortControllerRef.current = new AbortController();
+
         setIsSubmitting(true);
         setErrorAlert(null);
         const newMessages = [...messages, { type: 'user', text: inputValue }];
-        setMessages(newMessages);
+        // setMessages(newMessages);
 
         const formData = new FormData();
         formData.append('access_token', accessToken); // Append the access token to formData
@@ -53,6 +70,7 @@ function ConversationModal({ show, handleClose, apiURL }) {
         fetch(apiURL, {
             method: 'POST',
             body: formData,
+            signal: abortControllerRef.current.signal,
         })
             .then((response) => {
                 if (response.ok) {
@@ -83,7 +101,7 @@ function ConversationModal({ show, handleClose, apiURL }) {
     };
 
     return (
-        <Modal show={show} onHide={handleClose} centered>
+        <Modal show={show} onHide={onClose} centered>
             <Modal.Header closeButton>
                 <Modal.Title>GPT-4 Conversation</Modal.Title>
             </Modal.Header>

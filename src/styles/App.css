@@ -538,10 +538,10 @@ body {
 
 
 .aws-btn.small {
-  --button-default-height: 76px;
-  --button-default-font-size: 10px;
+  --button-default-height: 40px;
+  --button-default-font-size: 1px;
   --button-default-border-radius: 10px;
-  --button-horizontal-padding: 36px;
+  --button-horizontal-padding: 7px;
   --button-primary-color: #fffc6c;
   --button-primary-color-dark: #b9b500;
   --button-primary-color-light: #6c6a00;
