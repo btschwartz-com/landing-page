@@ -17,7 +17,7 @@ import ConversationModal from '../misc/ConvoModal.jsx';
 import { AwesomeButton } from "react-awesome-button";
 
 const title = 'More?'
-const tagline = "Bruh, you really want more? Hang tight, I'm working on it.";
+const tagline = "Bruh, you really want more? Fine, here's some more stuff."
 
 
 const styles = {
@@ -62,6 +62,8 @@ const Tagline = () => {
       setFetchedMessage(tagline);
     }, 5000); // Fallback to 'tagline' after 5 seconds
 
+    setFetchedMessage('Loading...');
+
     fetch('https://btschwartz.com/api/v1/chat/moremessage')
       .then(response => response.json())
       .then(data => {
@@ -74,6 +76,7 @@ const Tagline = () => {
       .catch(error => {
         console.error(error);
         clearTimeout(timeoutId);
+        setFetchedMessage(tagline);
       });
 
     return () => {

@@ -1,7 +1,6 @@
 import React from 'react';
 
 
-import { AwesomeButton } from "react-awesome-button";
 import toast from 'react-hot-toast';
 import 'react-awesome-button/dist/styles.css';
 

@@ -14,6 +14,9 @@ import ParticlesBg from 'particles-bg';
 import { Explanation } from '../misc/Toasts.jsx'
 import LoginModal from '../misc/LoginModal.jsx';
 import ConversationModal from '../misc/ConvoModal.jsx';
+import Loader from '../misc/Preloader.jsx';
+import { useContext } from 'react';
+import AnimationContext from '../misc/AnimationContext.jsx';
 
 const title = 'Hey!'
 const tagline = 'Welcome to my website! Check out some stuff below.'
@@ -163,24 +166,36 @@ const Home = () => {
 
   const { type, num } = getRandomType();
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { hasAnimated, setHasAnimated } = useContext(AnimationContext);
+
+
   return (
-    <div className="daylight" style={styles.bg}>
+    <>
+    {isLoading && !hasAnimated ? (
+      <Loader finishLoading={() => { setIsLoading(false); setHasAnimated(true); }} />
+    ) : (
+    
+      <div className="daylight" style={styles.bg}>
 
-      <div className="default" >
-        <main className="App-main">
-          
-          <Title />
-          <Tagline />
-          <Buttons buttonData={buttonData}/>
-          <Toaster />
-          <ParticlesBg type={type} bg={true} num={num} 
-          styles={{backgroundColor: 'black'}}
-          />
-        </main>
+        <div className="default" >
+          <main className="App-main">
+            
+            <Title />
+            <Tagline />
+            <Buttons buttonData={buttonData}/>
+            <Toaster />
+            <ParticlesBg type={type} bg={true} num={num} 
+            styles={{backgroundColor: 'black'}}
+            />
+          </main>
 
+        </div>
+        
       </div>
-      
-    </div>
+    )}
+    </>
   );
 };
 

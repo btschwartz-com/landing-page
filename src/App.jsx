@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'
+import React, { createRef, useState } from 'react'
 import {
   createBrowserRouter,
   useLocation,
@@ -10,6 +10,7 @@ import Home from './pages/Home.jsx'
 import More from './pages/More.jsx'
 import VIP from './pages/VIP.jsx'
 import './styles/App.css'
+import AnimationContext from './misc/AnimationContext.jsx';
 
 const routes = [
   { path: '/', name: 'Home', element: <Home />, nodeRef: createRef() },
@@ -58,9 +59,20 @@ const AppRouter = createBrowserRouter([
   },
 ])
 
-const App = () => (
-  <RouterProvider router={AppRouter} />
-)
+const App = () => {
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  
+
+  return (
+    <>
+    
+    <AnimationContext.Provider value={{ hasAnimated, setHasAnimated }}>
+      <RouterProvider router={AppRouter} />
+    </AnimationContext.Provider>
+    </>
+  )
+}
     
 
 

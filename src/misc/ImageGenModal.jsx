@@ -10,7 +10,7 @@ import '../styles/bootstrap.css';
 
 function ImageGenModal({ show, handleClose, onSubmit }) {
     const [inputValue, setInputValue] = useState('');
-    const [accessToken, setAccessToken] = useState('');
+    // const [accessToken, setAccessToken] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorAlert, setErrorAlert] = useState(null);
     const [showImageModal, setShowImageModal] = useState(false);
@@ -68,9 +68,9 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
     };
 
 
-    const handleAccessTokenChange = (event) => {
-        setAccessToken(event.target.value);
-    };
+    // const handleAccessTokenChange = (event) => {
+    //     setAccessToken(event.target.value);
+    // };
 
     return (
         <>
