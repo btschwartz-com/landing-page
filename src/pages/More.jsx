@@ -46,6 +46,7 @@ const Title = () => {
 const Tagline = () => {
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
   const [fetchedMessage, setFetchedMessage] = useState(null);
+  const [currentlyFetching, setCurrentlyFetching] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -58,9 +59,18 @@ const Tagline = () => {
   }, []);
 
   const fetchTagline = () => {
+
+    if (currentlyFetching) {
+      return;
+    }
+
     const timeoutId = setTimeout(() => {
       setFetchedMessage(tagline);
     }, 5000); // Fallback to 'tagline' after 5 seconds
+
+    
+
+    setCurrentlyFetching(true);
 
     setFetchedMessage('Loading...');
 
@@ -77,7 +87,11 @@ const Tagline = () => {
         console.error(error);
         clearTimeout(timeoutId);
         setFetchedMessage(tagline);
+      })
+      .finally(() => {
+        setCurrentlyFetching(false);
       });
+      
 
     return () => {
       clearTimeout(timeoutId);
