@@ -30,7 +30,7 @@ const styles = {
 function getRandomType() {
   const types = [
     { 'type': 'circle', 'num': 4 },
-    { 'type': 'square', 'num': 6 },
+    // { 'type': 'square', 'num': 6 },
     { 'type': 'thick', 'num': 40 },
   ]
   const randomIndex = Math.floor(Math.random() * types.length);
