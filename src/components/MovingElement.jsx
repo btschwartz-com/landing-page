@@ -7,11 +7,11 @@ import 'react-awesome-button/dist/styles.css';
 import '../styles/App.css';
 
 
-export const MovingElement = ({ element: Element, ...props }) => {
+export const MovingElement = ({ element: Element, effect, ...props }) => {
     return (
       <MovingComponent
-        type="unfold"
-        duration="1000ms"
+        type={effect}
+        duration="1500ms"
         delay="0s"
         direction="alternate"
         timing="ease"

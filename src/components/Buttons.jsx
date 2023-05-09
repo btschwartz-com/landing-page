@@ -10,7 +10,7 @@ import '../styles/App.css';
 
 
 
-const Buttons = ({ buttonData }) => {
+const Buttons = ({ buttonData, effect }) => {
   const [modalStates, setModalStates] = useState({});
 
   const handleShow = (modalId) => {
@@ -60,7 +60,7 @@ const Buttons = ({ buttonData }) => {
       );
 
       return (
-        <MovingElement key={button.text} element={() => (
+        <MovingElement key={button.text} effect={effect} element={() => (
           <>
             {button.navLink ? (
               <NavLink to={button.navLink}>

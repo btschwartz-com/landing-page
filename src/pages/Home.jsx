@@ -17,6 +17,8 @@ import ConversationModal from '../misc/ConvoModal.jsx';
 import Loader from '../misc/Preloader.jsx';
 import { useContext } from 'react';
 import AnimationContext from '../misc/AnimationContext.jsx';
+import { useLocation } from 'react-router-dom';
+
 
 const title = 'Hey!'
 const tagline = 'Welcome to my website! Check out some stuff below.'
@@ -70,7 +72,7 @@ const handleSuccess = () => {
 const Title = () => {
   return (
     <div className="my-container">
-      <MovingElement type='fadeIn' element={() => 
+      <MovingElement type='zoomIn' element={() => 
         <h1 className='intro'>{title}</h1>}>
       </MovingElement>      
     </div>
@@ -93,12 +95,12 @@ const Tagline = () => {
 
   return (
     <div className="my-container">
-      <MovingElement type='fadeIn' element={() =>
+      <MovingElement type='zoomIn' element={() =>
         <div className="tagline">
           {tagline}
         </div>}>
       </MovingElement>
-      <MovingElement type='fadeIn' element={() =>
+      <MovingElement type='zoomIn' element={() =>
         <div className="tagline-small">
           {currentTime}
         </div>}>
@@ -170,6 +172,45 @@ const Home = () => {
 
   const { hasAnimated, setHasAnimated } = useContext(AnimationContext);
 
+  const location = useLocation();
+
+
+  const handleExternalLinks = () => {
+    const allLinks = Array.from(document.querySelectorAll('a'));
+    if (allLinks.length > 0) {
+      allLinks.forEach(link => {
+        if (link.host !== window.location.host) {
+          link.setAttribute('rel', 'noopener noreferrer');
+          link.setAttribute('target', '_blank');
+        }
+      });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    scrollToTop();
+
+    if (location.hash) {
+      const id = location.hash.substring(1); // location.hash without the '#'
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView();
+          el.focus();
+        }
+      }, 0);
+    }
+
+    handleExternalLinks();
+  }, [isLoading, location]);
 
   return (
     <>
@@ -184,7 +225,7 @@ const Home = () => {
             
             <Title />
             <Tagline />
-            <Buttons buttonData={buttonData}/>
+            <Buttons buttonData={buttonData} effect="zoomIn"/>
             <Toaster />
             <ParticlesBg type={type} bg={true} num={num} 
             styles={{backgroundColor: 'black'}}

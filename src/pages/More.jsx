@@ -72,7 +72,7 @@ const Tagline = () => {
 
     setCurrentlyFetching(true);
 
-    setFetchedMessage('Loading...');
+    setFetchedMessage('...');
 
     fetch('https://btschwartz.com/api/v1/chat/moremessage')
       .then(response => response.json())
@@ -212,7 +212,7 @@ const MorePage = () => {
           {/* <MyParticles /> */}
           <Title />
           <Tagline />
-          <Buttons buttonData={buttonData}/>
+          <Buttons buttonData={buttonData} effect="unfold"/>
           <Toaster />
           
         </main>
