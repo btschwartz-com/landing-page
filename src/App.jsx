@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react'
+import React, { createRef, useState, useEffect } from 'react'
 import {
   createBrowserRouter,
   useLocation,
@@ -26,6 +26,10 @@ export const AppRoutes = () => {
   const currentOutlet = useOutlet()
   const { nodeRef } =
     routes.find((route) => route.path === location.pathname) ?? {}
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname]) // It runs every time the pathname changes.
   return (
     <>
         <SwitchTransition>

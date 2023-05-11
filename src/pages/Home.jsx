@@ -18,6 +18,7 @@ import Loader from '../misc/Preloader.jsx';
 import { useContext } from 'react';
 import AnimationContext from '../misc/AnimationContext.jsx';
 import { useLocation } from 'react-router-dom';
+import ContactModal from '../misc/ContactModal.jsx';
 
 
 const title = 'Hey!'
@@ -164,6 +165,15 @@ const Home = () => {
       },
       className: 'pink'
     },
+    {
+      text: 'Contact',
+      row: 7,
+      className: 'blue',
+      modal: ContactModal,
+      modalId: 'contact',
+      modalProps: {
+      },
+    }
   ]
 
   const { type, num } = getRandomType();
@@ -187,28 +197,11 @@ const Home = () => {
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
 
   useEffect(() => {
     if (isLoading) {
       return;
     }
-
-    scrollToTop();
-
-    if (location.hash) {
-      const id = location.hash.substring(1); // location.hash without the '#'
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView();
-          el.focus();
-        }
-      }, 0);
-    }
-
     handleExternalLinks();
   }, [isLoading, location]);
 
