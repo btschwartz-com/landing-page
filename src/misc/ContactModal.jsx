@@ -17,13 +17,18 @@ function ContactModal({ show, handleClose }) {
 
         setIsSubmitting(true);
 
-        console.log(form.current);
-        
+        const templateParams = {
+            "from_name": name,
+            "message": message,
+            "reply_to": email
+        };
 
-        emailjs.sendForm('service_si7990d', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_USER_ID')
+        emailjs.send('service_si7990d', 'template_ch3a0cx', templateParams, 'G8YL9ah9Ku0-HPi0c')
             .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
                 handleClose();
+                setName('');
+                setEmail('');
+                setMessage('');
             }, (error) => {
                 console.error('FAILED...', error);
             })
@@ -40,17 +45,17 @@ function ContactModal({ show, handleClose }) {
             <Modal.Body>
                 <p>Feel free to reach out!</p>
                 <Form ref={form} onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="name">
+                <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Name:</Form.Label>
-                        <Form.Control type="text" name="user_name" required />
+                        <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email:</Form.Label>
-                        <Form.Control type="email" name="user_email" required />
+                        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="message">
                         <Form.Label>Message:</Form.Label>
-                        <Form.Control as="textarea" rows={3} name="message" required />
+                        <Form.Control as="textarea" rows={3} value={message} onChange={(e) => setMessage(e.target.value)} required />
                     </Form.Group>
                 </Form>
             </Modal.Body>
