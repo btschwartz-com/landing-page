@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 
 
@@ -14,6 +14,7 @@ import ParticlesBg from 'particles-bg';
 import { FunFact, ServerInfo } from '../misc/Toasts.jsx';
 import ImageGenModal from '../misc/ImageGenModal.jsx';
 import ConversationModal from '../misc/ConvoModal.jsx';
+import AnimationContext from '../misc/AnimationContext.jsx';
 import { AwesomeButton } from "react-awesome-button";
 
 const title = 'More?'
@@ -196,6 +197,15 @@ const MorePage = () => {
 
   ]
 
+
+  const { setHasAnimated } = useContext(AnimationContext);
+
+
+  // if the user starts by going to More page, do not want to animate
+  // if they go back to home
+  useEffect(() => {
+    setHasAnimated(true);
+  }, []);
 
   return (
     <div className="daylight" style={styles.bg}>
