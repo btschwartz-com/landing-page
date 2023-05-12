@@ -16,6 +16,7 @@ import ImageGenModal from '../misc/ImageGenModal.jsx';
 import ConversationModal from '../misc/ConvoModal.jsx';
 import AnimationContext from '../misc/AnimationContext.jsx';
 import { AwesomeButton } from "react-awesome-button";
+import LoginModal from '../misc/LoginModal.jsx';
 
 const title = 'More?'
 const tagline = "Bruh, you really want more? Fine, here's some more stuff."
@@ -28,7 +29,30 @@ const styles = {
 
 
 
+const handleLoginClick = () => {
+  // Access /logged_in_user to check if the user is logged in
+  // will return 200 if logged in, 401 if not
+  fetch('/is_logged_in')
+    .then((response) => {
+      if (!response.ok) {
+        return false;
+      }
+      return true;
+    })
+    .then((logged_in) => {
+      if (logged_in) {
+        handleSuccess();
+      }
+    })
+    .catch((error) => {
+      // Don't do anything, the user is not logged in
+    });
   
+};
+
+const handleSuccess = () => {
+  window.location.href = '/vip';
+};
 
 
 
@@ -135,35 +159,35 @@ const MorePage = () => {
 
 
   const buttonData = [
+    
+    {
+      text: 'Fun Fact',
+      row: 3,
+      toast: FunFact,
+      className: 'gray'
+    },
+    {
+      text: 'Instagram Clone',
+      link: 'https://btschwartz.com/insta',
+      row: 3,
+      className: 'gray'
+    },
+    {
+      text: 'Chat with GPT',
+      link: 'https://chat.btschwartz.com',
+      row: 1,
+      className: 'green'
+    },
     {
       text: 'Pics',
       link: 'https://btschwartz.com/pics/',
       row: 1,
       className: 'purple'
     },
-    {
-      text: 'Fun Fact',
-      row: 1,
-      toast: FunFact,
-      className: 'gold'
-    },
-    {
-      text: 'Instagram Clone',
-      link: 'https://btschwartz.com/insta',
-      row: 6,
-      className: 'gray'
-    },
-    {
-      text: 'Chat with GPT',
-      link: 'https://chat.btschwartz.com',
-      row: 3,
-      className: 'green'
-    },
-
     
     {
       text: 'Hello Server',
-      row: 4,
+      row: 3,
       toast: ServerInfo,
       className: 'gray'
     },
@@ -178,21 +202,32 @@ const MorePage = () => {
     },
     {
       text: 'Return Home',
-      row: 7,
+      row: 4,
       navLink: '/',
       link: '/',
       className: 'blue',
     },
     {
-      text: 'GPT-4 Omega Convo',
-      row: 3,
+      text: 'GPT-4 Convo',
       modal: ConversationModal,
+      modalId: 'convo',
       modalProps: {
-        apiURL: 'https://btschwartz.com/api/v1/chat/danconvo',
+        apiURL: 'https://btschwartz.com/api/v1/chat/convo',
       },
-      modalId: 'convoModal',
-      className: 'gray',
-    }
+      row: 2,
+      className: 'green'
+    },
+    {
+      text: 'VIP',
+      row: 4,
+      modalId: 'vip',
+      modal: LoginModal,
+      handleClick: () => handleLoginClick(),
+      modalProps: { 
+        onSuccess: () => handleSuccess(),
+      },
+      className: 'gold'
+    },
 
 
   ]

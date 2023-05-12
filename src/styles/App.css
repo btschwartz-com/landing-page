@@ -536,6 +536,15 @@ body {
   --button-primary-border: none;
 }
 
+.aws-btn.red {
+  --button-primary-color: #ff6c6c;
+  --button-primary-color-dark: #b90000;
+  --button-primary-color-light: white;
+  --button-primary-color-hover: #ff3e3e;
+  --button-primary-color-active: #e10000;
+  --button-primary-border: none;
+}
+
 
 .aws-btn.small {
   --button-default-height: 40px;
