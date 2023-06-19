@@ -221,8 +221,8 @@ const Home = () => {
 
 
   const redirectToPortfolio = () => {
-    // window.location.href = "https://btschwartz.com/portfolio/";
-    navigate('/portfolio')
+    window.location.href = "https://btschwartz.com/portfolio/";
+    // navigate('/portfolio')
   }
 
   const cancelCountdown = () => {
