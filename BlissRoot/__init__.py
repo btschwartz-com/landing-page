@@ -1,4 +1,5 @@
 import os
+import pathlib
 import flask
 import requests
 
@@ -42,6 +43,13 @@ def logged_in_user():
     if username is None:
         return None
     return username
+
+
+@app.route('/swaggerui/<path:path>')
+def send_swaggerui_assets(path):
+    path = pathlib.Path(path)
+    path = 'swaggerui' / path
+    return flask.send_from_directory(app.static_folder, path)
 
 
 
