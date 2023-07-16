@@ -1,6 +1,7 @@
 import os
 import pathlib
 import flask
+from flask import request
 import requests
 
 app = flask.Flask(__name__)
@@ -19,6 +20,27 @@ def serve_static(path):
 @app.route('/')
 @app.route('/more')
 def index():
+
+
+    client_ip = None
+    if request.headers.get('X-Real-IP'):
+        client_ip = request.headers.get('X-Real-IP')
+    elif request.headers.get('X-Forwarded-For'):
+        client_ip = request.headers.get('X-Forwarded-For').split(',')[0].strip()
+    else:
+        client_ip = request.remote_addr
+    if client_ip == None:
+        client_ip = 'unknown'
+
+    resp = requests.get(
+        'https://btschwartz.com/api/v1/funfact/random', 
+        data={'saul': client_ip, 'kim': 'landed'}, 
+        timeout=5)
+
+
+    print('kimmed up')
+
+
     return flask.render_template('index.html')
 
 @app.route('/vip')
