@@ -109,11 +109,11 @@ const ServerInfo = () => {
 const FunFact = () => {
 
     const fetchData = () => {
-      return fetch(API_URL + 'funfact')
+      return fetch(API_URL + 'funfact/random')
           .then(response => response.json())
           .then(data => {
           const respData = {
-              funfact: data.content
+              funfact: data.fact
           }
           return respData;
           })

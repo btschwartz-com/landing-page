@@ -32,21 +32,21 @@ const styles = {
 const handleLoginClick = () => {
   // Access /logged_in_user to check if the user is logged in
   // will return 200 if logged in, 401 if not
-  fetch('/is_logged_in')
-    .then((response) => {
-      if (!response.ok) {
-        return false;
-      }
-      return true;
-    })
-    .then((logged_in) => {
-      if (logged_in) {
-        handleSuccess();
-      }
-    })
-    .catch((error) => {
-      // Don't do anything, the user is not logged in
-    });
+  // fetch('/is_logged_in')
+  //   .then((response) => {
+  //     if (!response.ok) {
+  //       return false;
+  //     }
+  //     return true;
+  //   })
+  //   .then((logged_in) => {
+  //     if (logged_in) {
+  //       handleSuccess();
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     // Don't do anything, the user is not logged in
+  //   });
   
 };
 
@@ -177,6 +177,12 @@ const MorePage = () => {
       link: 'https://chat.btschwartz.com',
       row: 1,
       className: 'green'
+    },
+    {
+      text: 'Waltuh Game',
+      link: 'https://btschwartz.com/waltuh/',
+      row: 2,
+      className: 'gray'
     },
     {
       text: 'Pics',

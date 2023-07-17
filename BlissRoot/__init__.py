@@ -3,6 +3,7 @@ import pathlib
 import flask
 from flask import request
 import requests
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
 
@@ -11,6 +12,13 @@ app.secret_key = os.urandom(24)
 
 
 app.static_folder = 'static'
+
+CORS(app, resources={r"/*": {"origins": ["http://test.btschwartz.com", 
+                                         "https://test.btschwartz.com",
+                                         "http://localhost:3000",
+                                         "http://127.0.0.1:5000"
+                                         
+                                         ]}})
 
 
 @app.route("/static/<path:path>")
@@ -45,11 +53,25 @@ def index():
 
 @app.route('/vip')
 def vip():
-    username = logged_in_user()
-    if username is None:
+    token = flask.session.get('token', None)
+    if token is None:
+        return flask.redirect(flask.url_for('index'))
+    
+    print(token)
+
+    headers = {'Authorization': 'Bearer ' + token}
+
+    endpoint = 'https://btschwartz.com/api/v1/protected'
+
+    response = requests.get(endpoint, headers=headers)
+    
+    print(response.status_code)
+    
+    if response.status_code == 200:
+        return flask.render_template('vip.html')
+    else:
         return flask.redirect(flask.url_for('index'))
 
-    return flask.render_template('vip.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -78,23 +100,26 @@ def send_swaggerui_assets(path):
 @app.route('/login', methods=['POST'])
 def login():
     data = flask.request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    token = data.get('token')
 
-    response = requests.post('https://btschwartz.com/api/v1/login', 
-                             json={'username': username, 'password': password})
+    headers = {'Authorization': 'Bearer ' + token}
+
+    endpoint = 'https://btschwartz.com/api/v1/protected'
+
+    response = requests.get(endpoint, headers=headers)
     
     print(response.status_code)
     
     if response.status_code == 200:
-        flask.session['username'] = username
+        flask.session['token'] = token
         return flask.jsonify({'result': 'success'}), 200
     else:
-        return flask.jsonify({'result': 'error', 'message': 'Invalid username or password'}), 401
+        return flask.jsonify({'result': 'error', 'message': 'Invalid token'}), 401
     
 
 @app.route('/is_logged_in')
 def is_logged_in():
+    # username = None
     username = logged_in_user()
     if username is None:
         return flask.jsonify({'result': 'error', 'message': 'Not logged in'}), 401

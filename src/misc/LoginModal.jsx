@@ -13,6 +13,7 @@ import '../styles/bootstrap.css';
 function LoginModal({ show, handleClose, onSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState(''); 
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -21,14 +22,14 @@ function LoginModal({ show, handleClose, onSuccess }) {
     setSubmitting(true);
     setErrorMessage('');
 
-    fetch('/login', {
+    fetch('http://127.0.0.1:5000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
+
+        token: token,
       }),
     })
       .then((response) => {
@@ -65,26 +66,19 @@ function LoginModal({ show, handleClose, onSuccess }) {
     <>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Enter Token</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="username">
-              <Form.Label>Username</Form.Label>
+          <Form.Group className="mb-3" controlId="token">
+              <Form.Label>Token</Form.Label>
               <Form.Control
                 type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={token}
+                onChange={(e) => setToken(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
+            
             {errorMessage && (
               <Alert variant="danger" onClose={() => setErrorMessage('')} dismissible>
                 {errorMessage}

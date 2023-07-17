@@ -29,30 +29,23 @@ const BackHome = () => {
 
 
 const buttonData = [
-  {
-    text: 'What?',
-    type: 'secondary',
-    row: 1,
-    toast: Explanation,
-    className: 'gold'
-
-  },
-  {
-    text: 'Test',
-    type: 'secondary',
-    row: 5,
-    toast: TestToast,
-    className: 'gold'
-
-  },
-
   
+ 
+
   {
-    text: 'Waltuh Game',
-    link: 'https://btschwartz.com/waltuh/',
-    row: 2,
-    className: 'gray'
+    text: "Visitors",
+    row: 1,
+    link: "https://btschwartz.com/api/v1/who",
+    className: 'red'
   },
+
+  {
+    text: "PMA",
+    row: 2,
+    link: "https://btschwartz.com/saulmcgill",
+    className: 'blue'
+  },
+  
   
   
   {
