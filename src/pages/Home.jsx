@@ -224,6 +224,21 @@ const Home = () => {
 
 
   useEffect(() => {
+    const formData = new FormData();
+    formData.append('saul', 'main');
+    fetch('/saul', {
+      method: 'POST',
+      body: formData
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      }
+    );
+  }, []);
+
+
+  useEffect(() => {
     if (isLoading) {
       return;
     }

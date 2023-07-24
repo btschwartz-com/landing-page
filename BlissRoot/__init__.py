@@ -29,6 +29,16 @@ def serve_static(path):
 @app.route('/more')
 def index():
 
+    return flask.render_template('index.html')
+
+
+@app.route('/saul', methods=['POST'])
+def saul():
+
+    # see if there is a form value of 'saul' attached
+    action = request.form.get('saul', "")
+
+    print('action: ' + action)
 
     client_ip = None
     if request.headers.get('X-Real-IP'):
@@ -42,14 +52,14 @@ def index():
 
     resp = requests.get(
         'https://btschwartz.com/api/v1/funfact/random', 
-        data={'saul': client_ip, 'kim': 'landed'}, 
+        data={'saul': client_ip, 'kim': ('home @ ' + action)}, 
         timeout=5)
+    
+    data = {
+        'saul': 'kim'
+    }
 
-
-    print('kimmed up')
-
-
-    return flask.render_template('index.html')
+    return data
 
 @app.route('/vip')
 def vip():

@@ -143,6 +143,20 @@ let config1 = {
 
 const VIP = () => {
 
+  useEffect(() => {
+    const formData = new FormData();
+    formData.append('saul', 'vip');
+    fetch('/saul', {
+      method: 'POST',
+      body: formData
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      }
+    );
+  }, []);
+
 
   return (
     <div className="daylight" style={styles.bg}>
