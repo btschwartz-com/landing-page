@@ -1,24 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <link rel="shortcut icon" href="{{ url_for('serve_static', path='favicon.ico') }}" />
-  <link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="theme-color" content="#2c3e50" />
-  <link rel="manifest" href="{{ url_for('serve_static', path='manifest.json') }}" />
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="{{ url_for('serve_static', path='favicon.ico') }}" />
+    <link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#2c3e50" />
+    <link rel="manifest" href="{{ url_for('serve_static', path='manifest.json') }}" />
+    
+    <title>Ben Schwartz</title>
+  </head>
   
-  <title>Ben Schwartz</title>
-</head>
+  <body >
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div id="root"></div>
     <script type="text/javascript" src="{{ url_for('serve_static', path='js/home.bundle.js') }}"></script>
-    <script>
-      // var SAUL_MCGILL = "{{ saul }}";
-  </script>
-</body>
 
+    <script src="{{ url_for('serve_static', path='js/oneko-element.js') }}?define" type="module"></script>
+
+
+
+
+    <o-neko
+      y="200"
+      x="200"
+      speed="15"
+      id="$smallNeko"
+      style="filter: invert(0.25) sepia(1) hue-rotate(0.7turn)"
+    
+    ></o-neko>
+
+
+    <script>
+
+
+      const nekoList = [
+        { $neko: $smallNeko, name: "$smallNeko" },
+      ];
+
+      window.onload = () => {
+        nekoList.forEach(({ $neko, name }) => {
+          const data = JSON.parse(localStorage.getItem(name));
+          Object.assign($neko.neko, data);
+          Object.assign($neko.goto, data);
+          $neko.updatePosition();
+        });
+
+        window.onbeforeunload = () => {
+          nekoList.forEach(({ $neko, name }) => {
+            const data = { x: $neko.neko.x, y: $neko.neko.y };
+            localStorage.setItem(name, JSON.stringify(data));
+          });
+        };
+      };
+    </script>
+  </body>
 </html>
