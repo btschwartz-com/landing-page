@@ -62,14 +62,22 @@ function ConversationModal({ show, handleClose, apiURL }) {
         const newMessages = [...messages, { type: 'user', text: inputValue }];
         // setMessages(newMessages);
 
-        const formData = new FormData();
-        formData.append('access_token', accessToken); // Append the access token to formData
-        formData.append('prev_messages', JSON.stringify(newMessages));
+        
+        
+        const data = {
+            "prompt": inputValue,
+            "model": "gpt-4",
+            "system_prompt": "",
+            "prev_messages": messages
 
-
+        }
         fetch(apiURL, {
             method: 'POST',
-            body: formData,
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
             signal: abortControllerRef.current.signal,
         })
             .then((response) => {
@@ -82,7 +90,7 @@ function ConversationModal({ show, handleClose, apiURL }) {
                 }
             })
             .then((data) => {
-                const resp = data.content;
+                const resp = data.response;
                 newMessages.push({ type: 'bot', text: resp });
                 setMessages(newMessages);
                 setInputValue('');
@@ -110,10 +118,10 @@ function ConversationModal({ show, handleClose, apiURL }) {
                 controlId="accessToken"
                 style={{ marginLeft: '16px', marginRight: '16px' }}
             >
-                <Form.Label>Sorry, I gotta do this:</Form.Label>
+                
                 <Form.Control
                     type="text"
-                    placeholder="Enter access token"
+                    placeholder="Access token"
                     value={accessToken}
                     onChange={handleAccessTokenChange}
                 />
