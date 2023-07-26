@@ -45,7 +45,10 @@ function ConversationModal({ show, handleClose, apiURL }) {
 
     const handleClearConversation = () => {
         if (window.confirm('Are you sure you want to clear the entire conversation?')) {
-            setMessages([]);
+            setMessages([
+                { type: 'user', text: 'Hello, Chatbot!' },
+                { type: 'bot', text: 'Hello! How can I help you today?' }
+              ]);
         }
     };
 
