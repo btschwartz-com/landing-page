@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'BlissRoot', 'static', 'js'),
     filename: '[name].bundle.js',
   },
-  mode: 'development',
+  mode: 'production',
 
   plugins: [
     new CleanWebpackPlugin(),
