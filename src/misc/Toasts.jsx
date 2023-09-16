@@ -42,7 +42,7 @@ const API_URL = 'https://btschwartz.com/api/v1/';
 const explanation = "My name is Ben Schwartz, and you just found the landing page of my website. Please check out my portfolio, it's the only decent thing you'll find here.";
 
 
-
+const contactMsg = "You can reach me here: scben@umich.edu";
 
 
 
@@ -161,6 +161,21 @@ const Explanation = () => toast(explanation, {
 });
 
 
+const ContactMsg = () => toast(contactMsg, {
+  style: {
+    minWidth: '250px',
+    fontSize: "20px",
+    backgroundColor: "#6678c5",
+    color: "#fdffe5",
+    fontFamily: "Roboto, sans-serif",
+  },
+  duration: 4500,
+  reverseOrder: true,
+  position: 'top-left',
+});
+
+
+
 const AskChatGPT = (prompt) => {
 
   const gptFetch = (prompt) => {
@@ -270,4 +285,4 @@ const More = () => toast(more, {
 });
 
 
-export { ServerInfo, FunFact, Explanation, AskChatGPT, TestToast, More } 
+export { ServerInfo, FunFact, Explanation, AskChatGPT, TestToast, More, ContactMsg } 

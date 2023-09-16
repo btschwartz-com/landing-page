@@ -11,7 +11,7 @@ import Buttons from '../components/Buttons.jsx';
 import '../styles/App.css';
 import 'react-awesome-button/dist/styles.css';
 import ParticlesBg from 'particles-bg';
-import { Explanation } from '../misc/Toasts.jsx'
+import { Explanation, ContactMsg } from '../misc/Toasts.jsx'
 import Loader from '../misc/Preloader.jsx';
 import { useContext } from 'react';
 import AnimationContext from '../misc/AnimationContext.jsx';
@@ -88,7 +88,8 @@ const buttonData = [
     text: 'Contact',
     row: 3,
     className: 'red',
-    modal: ContactModal,
+    // modal: ContactModal,
+    toast: ContactMsg,
     modalId: 'contact',
     modalProps: {
     },
