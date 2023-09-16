@@ -165,7 +165,7 @@ const ContactMsg = () => toast(contactMsg, {
   style: {
     minWidth: '250px',
     fontSize: "20px",
-    backgroundColor: "#6678c5",
+    backgroundColor: "#ff6c6c",
     color: "#fdffe5",
     fontFamily: "Roboto, sans-serif",
   },
