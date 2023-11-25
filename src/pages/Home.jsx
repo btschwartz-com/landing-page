@@ -16,7 +16,10 @@ import Loader from '../misc/Preloader.jsx';
 import { useContext } from 'react';
 import AnimationContext from '../misc/AnimationContext.jsx';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import ContactModal from '../misc/ContactModal.jsx';
+import toast from 'react-hot-toast';
+import { set } from 'animejs';
 
 
 const title = 'Hey!'
@@ -26,6 +29,34 @@ const tagline = 'Welcome to my website! Check out some stuff below.'
 const styles = {
   bg: {
   },
+  countdownToast: {
+    minWidth: "250px",
+    fontSize: "20px",
+    backgroundColor: "#bafc03",
+    color: "#6c6a00",
+    fontFamily: "Roboto, sans-serif",
+    whiteSpace: "pre-wrap",
+    width: "auto",
+  },
+  cancelToast: {
+    minWidth: "250px",
+    fontSize: "20px",
+    backgroundColor: "#848289",
+    color: "#fdffe5",
+    fontFamily: "Roboto, sans-serif",
+    whiteSpace: "pre-wrap",
+    width: "auto",
+  },
+  stopToast: {
+    minWidth: "250px",
+    fontSize: "20px",
+    backgroundColor: "#ff6c6c",
+    color: "#fdffe5",
+    fontFamily: "Roboto, sans-serif",
+    whiteSpace: "pre-wrap",
+    width: "auto",
+  },
+  
 }
 
 function getRandomType() {
@@ -40,6 +71,7 @@ function getRandomType() {
 
 
 
+
 const buttonData = [
   {
     text: 'What?',
@@ -48,51 +80,57 @@ const buttonData = [
     className: 'gold'
 
   },
+  
+  
+
+  {
+    text: 'GitHub',
+    link: 'https://github.com/btschwartz12',
+    icon: faGithub,
+    row: 2,
+    className: 'green'
+  },
   {
     text: 'Portfolio',
     link: 'https://btschwartz.com/portfolio/',
-    row: 2,
+    row: 3,
     className: 'purple'
 
   },
   {
+    text: 'LinkedIn',
+    link: 'https://www.linkedin.com/in/ben-schwartz-1b700b225',
+    icon: faLinkedin,
+    row: 2,
+    className: 'blue'
+  },
+  {
     text: 'Resume',
     link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
-    row: 2,
+    row: 3,
     className: 'black'
   },
   
 
-  {
-    text: 'More',
-    row: 3,
-    className: 'gray',
-    navLink: '/more',
-    link: '/more'
-
-  },
-
-  {
-    text: 'API',
-    row: 4,
-    className: 'green',
-    link: 'https://btschwartz.com/api/v1/'
-
-    
-
-  },
-
-
+  
   
   {
     text: 'Contact',
-    row: 3,
-    className: 'red',
+    row: 4,
+    className: 'gray',
     // modal: ContactModal,
     toast: ContactMsg,
     modalId: 'contact',
     modalProps: {
     },
+  },
+  {
+    text: 'More',
+    row: 4,
+    className: 'gray',
+    navLink: '/more',
+    link: '/more'
+
   }
 ]
 
@@ -138,60 +176,6 @@ const Tagline = () => {
   );
 };
 
-const Countdown = ({ onEnd, onCancel }) => {
-  const [countdown, setCountdown] = useState(5);
-
-  useEffect(() => {
-    if (countdown < 1) {
-      return;
-    }
-    
-    const timer = setInterval(() => {
-      setCountdown((prevCountdown) => prevCountdown - 1);
-    }, 1000); // Update every 1 second
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [countdown]);
-
-  useEffect(() => {
-    if (countdown === 0) {
-      onEnd();
-    }
-  }, [countdown, onEnd]);
-
-  return (
-    <>
-    <div className="my-container">
-      <MovingElement key={countdown} type='zoomIn' element={() =>
-        <div className='intro'>
-          {countdown > 0 ? countdown : 0}
-        </div>
-      }/>
-    </div>
-    <div className='my-container'>
-      <MovingElement type='zoomIn' element={() =>
-          <div className="tagline">
-            Redirecting to my portfolio...
-          </div>}>
-        </MovingElement>
-    </div>
-    <div className='my-container'>
-      <MovingElement type='slideInFromTop' element={() =>
-
-        <AwesomeButton
-            type='primary'
-            className={`aws-btn purple`}
-            onPress={onCancel}
-        >
-          Stop!
-        </AwesomeButton>
-      }/>
-    </div>
-    </>
-  );
-};
 
 
 
@@ -219,7 +203,11 @@ const Home = () => {
 
   const { hasAnimated, setHasAnimated } = useContext(AnimationContext);
 
+  const [countdownToastIds, setCountdownToastIds] = useState([]);
+
   const location = useLocation();
+
+  const [countdown, setCountdown] = useState(5);
 
   const navigate = useNavigate();
 
@@ -255,15 +243,79 @@ const Home = () => {
 
   const cancelCountdown = () => {
     setCancel(true);
+
+    
+    for (const toastId of countdownToastIds) {
+      toast.dismiss(toastId);
+    }
+
+    toast.success(`Crisis Averted`, {
+      duration: 2000,
+      position: 'bottom-center',
+      style: styles.cancelToast,
+    });
   };
 
   const finishLoading = () => {
     setIsLoading(false);
     setHasAnimated(true);
+
+    toast(
+      (t) => (
+        <div
+          onClick={() => {
+            toast.dismiss(t.id);
+            cancelCountdown();
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          Stop!
+        </div>
+      ),
+      {
+        duration: 5000,
+        style: styles.stopToast,
+        position: 'bottom-center',
+      }
+    );
+    
   };
+
+  useEffect(() => {
+    if ((isLoading && !hasAnimated) || cancel) {
+      return;
+    }
+    if (countdown < 1) {
+      redirectToPortfolio();
+      return;
+    }
+
+    for (const toastId of countdownToastIds) {
+      toast.dismiss(toastId);
+    }
+
+    // Display toast notification
+    const newToastId = toast(`Redirecting to my portfolio in ${countdown}...`, {
+      duration: 1000,
+      position: 'bottom-center',
+      style: styles.countdownToast,
+    });
+    setCountdownToastIds((prevCountdownToastIds) => [...prevCountdownToastIds, newToastId]);
+
+    const timer = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000); // Update every 1 second
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [countdown, hasAnimated, isLoading, cancel]);
+
+
 
   return (
     <>
+      
       {isLoading && !hasAnimated ? (
         <Loader finishLoading={finishLoading} />
       ) : (
@@ -272,18 +324,12 @@ const Home = () => {
           <div className="daylight" style={styles.bg}>
             <div className="default">
               <main className="App-main">
-                {cancel ? (
-                <>
+
                 <Title />
                 <Tagline />
                 <Buttons buttonData={buttonData} effect="zoomIn" />
                 <Toaster />
-                </>
-                ) : (
-                  <>
-                    <Countdown onEnd={redirectToPortfolio} onCancel={cancelCountdown} />
-                  </>
-                )}
+                
               </main>
             </div>
           </div>

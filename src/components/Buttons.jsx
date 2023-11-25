@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { AwesomeButton } from "react-awesome-button";
 import 'react-awesome-button/dist/styles.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MovingElement } from './MovingElement.jsx';
 import { NavLink } from 'react-router-dom';
 
@@ -55,7 +56,11 @@ const Buttons = ({ buttonData, effect }) => {
           className={`aws-btn ${button.className}`}
           onPress={handleClick}
         >
-          {button.text}
+          {button.icon ? (
+            <FontAwesomeIcon icon={button.icon} size="2x" /> // Set the size to "2x" (2 times larger)
+          ) : (
+            button.text
+          )}
         </AwesomeButton>
       );
 

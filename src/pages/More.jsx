@@ -234,6 +234,12 @@ const MorePage = () => {
       },
       className: 'gold'
     },
+    {
+      text: 'API',
+      row: 1,
+      className: 'green',
+      link: 'https://btschwartz.com/api/v1/'
+    },
 
 
   ]
