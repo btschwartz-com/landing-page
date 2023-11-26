@@ -249,14 +249,21 @@ const Home = () => {
       toast.dismiss(toastId);
     }
 
-    toast.success(`Crisis Averted`, {
+    toast.remove();
+
+    const toastId = toast.success(`Crisis Averted`, {
       duration: 2000,
       position: 'bottom-center',
       style: styles.cancelToast,
     });
+
+    setTimeout(() => {
+      toast.dismiss(toastId);
+    }, 2000);
   };
 
   const finishLoading = () => {
+    
     setIsLoading(false);
     setHasAnimated(true);
 
