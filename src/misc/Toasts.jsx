@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import 'react-awesome-button/dist/styles.css';
 
 import '../styles/App.css';
+import { set } from 'animejs';
 
 
 const styles = {
@@ -160,19 +161,47 @@ const Explanation = () => toast(explanation, {
   position: 'top-left',
 });
 
+const message = "Here's my email:";
+const email = "scben@umich.edu";
 
-const ContactMsg = () => toast(contactMsg, {
-  style: {
-    minWidth: '250px',
-    fontSize: "20px",
-    backgroundColor: "#ff6c6c",
-    color: "#black",
-    fontFamily: "Roboto, sans-serif",
-  },
-  duration: 4500,
-  reverseOrder: true,
-  position: 'top-left',
-});
+const ContactMsg = () => {
+  // First Toast for the message
+  const firstToastId = toast(message, {
+    style: {
+      minWidth: '250px',
+      fontSize: "20px",
+      backgroundColor: "#ff6c6c",
+      color: "#fdffe5",
+      fontFamily: "Roboto, sans-serif",
+    },
+    duration: 2000,
+    reverseOrder: true,
+    position: 'top-left',
+  });
+
+  setTimeout(() => {
+    toast.dismiss(firstToastId);
+  }, 2000);
+
+  // Second Toast for the email
+  setTimeout(() => {
+    const secondToastId = toast(email, {
+      style: {
+        minWidth: '250px',
+        fontSize: "20px",
+        backgroundColor: "#bafc03",
+        color: "#6c6a00",
+        fontFamily: "Roboto, sans-serif",
+      },
+      duration: 2000,
+      reverseOrder: true,
+      position: 'bottom-left',
+    });
+    setTimeout(() => {
+      toast.dismiss(secondToastId);
+    }, 2000);
+  }, 1000);
+};
 
 
 
