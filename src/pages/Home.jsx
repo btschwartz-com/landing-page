@@ -250,7 +250,7 @@ const Home = () => {
     }
 
     toast.remove();
-
+    setCountdown(5);
     const toastId = toast.success(`Crisis Averted`, {
       duration: 2000,
       position: 'bottom-center',
@@ -289,6 +289,14 @@ const Home = () => {
   };
 
   useEffect(() => {
+
+    const hasVisitedMorePage = localStorage.getItem('visitedMorePage') === 'true';
+
+    if (hasVisitedMorePage) {
+      return;
+    }
+
+    
     if ((isLoading && !hasAnimated) || cancel) {
       return;
     }
@@ -300,6 +308,7 @@ const Home = () => {
     for (const toastId of countdownToastIds) {
       toast.dismiss(toastId);
     }
+
 
     // Display toast notification
     const newToastId = toast(`Redirecting to my portfolio in ${countdown}...`, {

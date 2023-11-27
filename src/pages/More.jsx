@@ -29,6 +29,7 @@ const styles = {
 
 
 
+
 const handleLoginClick = () => {
   // Access /logged_in_user to check if the user is logged in
   // will return 200 if logged in, 401 if not
@@ -247,11 +248,18 @@ const MorePage = () => {
 
   const { setHasAnimated } = useContext(AnimationContext);
 
+  
+
 
   // if the user starts by going to More page, do not want to animate
   // if they go back to home
   useEffect(() => {
     setHasAnimated(true);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('visitedMorePage', 'true');
+
   }, []);
 
   useEffect(() => {
