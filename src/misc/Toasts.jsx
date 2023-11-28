@@ -176,7 +176,7 @@ const ContactMsg = () => {
     },
     duration: 2000,
     reverseOrder: true,
-    position: 'top-left',
+    position: 'top-right',
   });
 
   setTimeout(() => {
@@ -191,13 +191,14 @@ const ContactMsg = () => {
         fontSize: "20px",
         backgroundColor: "#bafc03",
         color: "#6c6a00",
-        fontFamily: "Roboto, sans-serif",
+        fontFamily: "Roboto, sans-serif", 
       },
       duration: 2000,
       reverseOrder: true,
-      position: 'bottom-left',
+      position: 'bottom-right',
     });
     setTimeout(() => {
+
       toast.dismiss(secondToastId);
     }, 2000);
   }, 1000);
@@ -205,8 +206,10 @@ const ContactMsg = () => {
 
 
 
-const AskChatGPT = (prompt) => {
 
+
+const AskChatGPT = (prompt) => {
+ 
   const gptFetch = (prompt) => {
     return fetch('https://btschwartz.com/api/v1/chat/ask', {
       method: 'POST',
