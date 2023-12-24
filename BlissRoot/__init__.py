@@ -25,6 +25,11 @@ CORS(app, resources={r"/*": {"origins": ["http://test.btschwartz.com",
 def serve_static(path):
     return flask.send_from_directory('static', path)
 
+
+@app.route('/resume.pdf')
+def resume():
+    return flask.redirect("https://btschwartz.com/api/resume.pdf")
+
 @app.route('/')
 @app.route('/more')
 def index():
