@@ -106,7 +106,7 @@ const buttonData = [
   },
   {
     text: 'Resume',
-    link: 'https://drive.google.com/file/d/1wCPzd7fiAko-PfaizeCkd8ZChVdLK7eA/view?usp=sharing',
+    link: 'https://btschwartz.com/resume.pdf',
     row: 3,
     className: 'black'
   },
