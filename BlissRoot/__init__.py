@@ -27,6 +27,7 @@ def serve_static(path):
 
 
 @app.route('/resume.pdf')
+@app.route('/resume')
 def resume():
     return flask.redirect("https://btschwartz.com/api/resume.pdf")
 
