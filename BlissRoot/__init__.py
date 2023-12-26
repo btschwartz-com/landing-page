@@ -1,12 +1,13 @@
 import os
 import pathlib
 import flask
-from flask import request
+from flask import request, jsonify
 import requests
 from flask_cors import CORS
-
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 app = flask.Flask(__name__)
-
+import redis
 
 app.secret_key = os.urandom(24)
 
@@ -19,12 +20,23 @@ CORS(app, resources={r"/*": {"origins": ["http://test.btschwartz.com",
                                          "http://127.0.0.1:5000"
                                          
                                          ]}})
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+redis_client = redis.from_url(redis_url)
 
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address,
+    default_limits=["1 per second"],
+    storage_uri=redis_url,
+)
 
 @app.route("/static/<path:path>")
 def serve_static(path):
     return flask.send_from_directory('static', path)
 
+@app.errorhandler(429)
+def ratelimit_error(e):
+    return jsonify(error="ratelimit exceeded", message=str(e.description)), 429
 
 @app.route('/resume.pdf')
 @app.route('/resume')
