@@ -26,7 +26,7 @@ redis_client = redis.from_url(redis_url)
 limiter = Limiter(
     app=app,
     key_func=get_remote_address,
-    default_limits=["1 per second"],
+    default_limits=["30 per minute"],
     storage_uri=redis_url,
 )
 
