@@ -39,7 +39,7 @@ const styles = {
 }
 
 
-const API_URL = 'https://btschwartz.com/api/v1/';
+const API_URL = 'https://test.btschwartz.com/api/v1/';
 const explanation = "My name is Ben Schwartz, and you just found the landing page of my website. Please check out my portfolio, it's the only decent thing you'll find here.";
 
 

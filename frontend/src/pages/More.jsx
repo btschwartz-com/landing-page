@@ -100,7 +100,7 @@ const Tagline = () => {
 
     setFetchedMessage('...');
 
-    fetch('https://btschwartz.com/api/v1/chat/moremessage')
+    fetch('https://test.btschwartz.com/api/v1/chat/moremessage')
       .then(response => response.json())
       .then(data => {
         const respData = {
@@ -163,50 +163,50 @@ const MorePage = () => {
     
     {
       text: 'Fun Fact',
-      row: 3,
+      row: 2,
       toast: FunFact,
       className: 'gray'
     },
     {
       text: 'Instagram Clone',
-      link: 'https://btschwartz.com/insta',
-      row: 3,
+      link: 'https://test.btschwartz.com/insta',
+      row: 2,
       className: 'gray'
     },
     {
-      text: 'Chat with GPT',
-      link: 'https://chat.btschwartz.com',
+      text: 'Chat with Saul',
+      link: 'https://chat.test.btschwartz.com',
       row: 1,
-      className: 'green'
+      className: 'pink'
     },
     {
-      text: 'Waltuh Game',
-      link: 'https://btschwartz.com/waltuh/',
+      text: 'Waltuh',
+      link: 'https://test.btschwartz.com/waltuh/',
       row: 2,
       className: 'gray'
     },
     {
       text: 'Pics',
-      link: 'https://btschwartz.com/pics/',
+      link: 'https://test.btschwartz.com/pics/',
       row: 1,
       className: 'purple'
     },
     
-    {
-      text: 'Hello Server',
-      row: 3,
-      toast: ServerInfo,
-      className: 'gray'
-    },
-    {
-      text: 'Image Generator',
-      row: 2,
-      modal: ImageGenModal,
-      modalId: 'imageGenModal',
+    // {
+    //   text: 'Hello Server',
+    //   row: 3,
+    //   toast: ServerInfo,
+    //   className: 'gray'
+    // },
+    // {
+    //   text: 'Image Generator',
+    //   row: 2,
+    //   modal: ImageGenModal,
+    //   modalId: 'imageGenModal',
 
-      className: 'pink'
+    //   className: 'gray'
 
-    },
+    // },
     {
       text: 'Return Home',
       row: 4,
@@ -214,16 +214,16 @@ const MorePage = () => {
       link: '/',
       className: 'blue',
     },
-    {
-      text: 'GPT-4 Convo',
-      modal: ConversationModal,
-      modalId: 'convo',
-      modalProps: {
-        apiURL: 'https://btschwartz.com/api/v1/chat/convo',
-      },
-      row: 2,
-      className: 'green'
-    },
+    // {
+    //   text: 'GPT-4 Convo',
+    //   modal: ConversationModal,
+    //   modalId: 'convo',
+    //   modalProps: {
+    //     apiURL: 'https://btschwartz.com/api/v1/chat/convo',
+    //   },
+    //   row: 2,
+    //   className: 'green'
+    // },
     {
       text: 'VIP',
       row: 4,
@@ -239,7 +239,7 @@ const MorePage = () => {
       text: 'API',
       row: 1,
       className: 'green',
-      link: 'https://btschwartz.com/api/v1/'
+      link: 'https://test.btschwartz.com/api/v1/'
     },
 
 

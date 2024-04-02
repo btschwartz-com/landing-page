@@ -4,7 +4,7 @@ services:
     container_name: lp-redis
     image: redis
     ports:
-      - 6379:6379
+      - ${BLP_REDIS_PORT:-6379}:6379
     profiles:
       - production
   
@@ -12,7 +12,7 @@ services:
     container_name: lp-fe-build
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.build
     volumes:
       - ./build:/src/build
     command: npx webpack --config /src/webpack.config.js
@@ -24,11 +24,9 @@ services:
     build:
       context: ./BlissRoot
     environment:
-      - REDIS_URL=redis://redis:6379/0
-    depends_on:
-      - redis
+      - REDIS_URL=redis://shared-redis:6379/0
     ports:
-      - 8000:8000
+      - ${BLP_SERVER_PORT:-8000}:8000
     volumes:
       - ./build:/app/build
     command: /start-server.sh
@@ -36,14 +34,22 @@ services:
       - production
 
 
-   # # cp /app/build/bundle.js /app/static/js/ &&
-   # frontend-dev:
-    #   container_name: bliss-portfolio-frontend-dev
-    #   build:
-    #     context: ./frontend
-    #     dockerfile: Dockerfile
-    #   ports:
-    #     - 3000:3000
-    #   command: npm run start
-    #   profiles:
-    #     - development
+  frontend-develop:
+    container_name: lp-fe-develop
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.develop
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - WDS_SOCKET_HOST=127.0.0.1 
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true 
+    profiles:
+      - development
+    command: npm run start
+
