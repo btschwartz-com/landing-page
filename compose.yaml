@@ -4,7 +4,7 @@ services:
     container_name: lp-redis
     image: redis
     ports:
-      - ${BLP_REDIS_PORT:-6379}:6379
+      - ${BLP_REDIS_PORT}:6379
     profiles:
       - production
   
@@ -24,9 +24,9 @@ services:
     build:
       context: ./BlissRoot
     environment:
-      - REDIS_URL=redis://shared-redis:6379/0
+      - REDIS_URL=redis://lp-redis:6379
     ports:
-      - ${BLP_SERVER_PORT:-8000}:8000
+      - ${BLP_SERVER_PORT}:8000
     volumes:
       - ./build:/app/build
     command: /start-server.sh
