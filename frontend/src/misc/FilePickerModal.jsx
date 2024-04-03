@@ -29,7 +29,7 @@ function ImagePicker({ show, handleClose, onSubmit }) {
         formData.append('author', name);
 
 
-        fetch('https://btschwartz.com/api/v1/pics/upload', {
+        fetch('https://test.btschwartz.com/api/v1/pics/upload', {
             method: 'POST',
             body: formData,
         })

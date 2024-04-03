@@ -211,7 +211,7 @@ const ContactMsg = () => {
 const AskChatGPT = (prompt) => {
  
   const gptFetch = (prompt) => {
-    return fetch('https://btschwartz.com/api/v1/chat/ask', {
+    return fetch('https://test.btschwartz.com/api/v1/chat/ask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

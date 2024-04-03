@@ -214,16 +214,16 @@ const MorePage = () => {
       link: '/',
       className: 'blue',
     },
-    // {
-    //   text: 'GPT-4 Convo',
-    //   modal: ConversationModal,
-    //   modalId: 'convo',
-    //   modalProps: {
-    //     apiURL: 'https://btschwartz.com/api/v1/chat/convo',
-    //   },
-    //   row: 2,
-    //   className: 'green'
-    // },
+    {
+      text: 'GPT-4 Convo',
+      modal: ConversationModal,
+      modalId: 'convo',
+      modalProps: {
+        apiURL: 'https://test.btschwartz.com/api/v1/chat/convo',
+      },
+      row: 2,
+      className: 'green'
+    },
     {
       text: 'VIP',
       row: 4,

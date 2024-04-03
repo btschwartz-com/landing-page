@@ -92,7 +92,7 @@ const buttonData = [
   },
   {
     text: 'Portfolio',
-    link: 'https://btschwartz.com/portfolio/',
+    link: 'https://test.btschwartz.com/portfolio/',
     row: 3,
     className: 'purple'
 
@@ -106,7 +106,7 @@ const buttonData = [
   },
   {
     text: 'Resume',
-    link: 'https://btschwartz.com/resume.pdf',
+    link: 'https://test.btschwartz.com/resume.pdf',
     row: 3,
     className: 'black'
   },
@@ -237,7 +237,7 @@ const Home = () => {
 
 
   const redirectToPortfolio = () => {
-    window.location.href = "https://btschwartz.com/portfolio/";
+    window.location.href = "https://test.btschwartz.com/portfolio/";
     // navigate('/portfolio')
   }
 
