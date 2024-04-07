@@ -41,7 +41,7 @@ def ratelimit_error(e):
 @app.route('/resume.pdf')
 @app.route('/resume')
 def resume():
-    return flask.redirect("https://test.btschwartz.com/api/resume.pdf")
+    return flask.redirect("https://btschwartz.com/api/resume.pdf")
 
 @app.route('/')
 @app.route('/more')
@@ -69,7 +69,7 @@ def saul():
         client_ip = 'unknown'
 
     resp = requests.get(
-        'https://test.btschwartz.com/api/v1/funfact/random', 
+        'https://btschwartz.com/api/v1/funfact/random', 
         data={'saul': client_ip, 'kim': ('home @ ' + action)}, 
         timeout=5)
     
@@ -89,7 +89,7 @@ def vip():
 
     headers = {'Authorization': 'Bearer ' + token}
 
-    endpoint = 'https://test.btschwartz.com/api/v1/protected'
+    endpoint = 'https://btschwartz.com/api/v1/protected'
 
     response = requests.get(endpoint, headers=headers)
     
@@ -132,7 +132,7 @@ def login():
 
     headers = {'Authorization': 'Bearer ' + token}
 
-    endpoint = 'https://test.btschwartz.com/api/v1/protected'
+    endpoint = 'https://btschwartz.com/api/v1/protected'
 
     response = requests.get(endpoint, headers=headers)
     

@@ -100,7 +100,7 @@ const Tagline = () => {
 
     setFetchedMessage('...');
 
-    fetch('https://test.btschwartz.com/api/v1/chat/moremessage')
+    fetch('https://btschwartz.com/api/v1/chat/moremessage')
       .then(response => response.json())
       .then(data => {
         const respData = {
@@ -169,25 +169,25 @@ const MorePage = () => {
     },
     {
       text: 'Instagram Clone',
-      link: 'https://test.btschwartz.com/insta',
+      link: 'https://btschwartz.com/insta',
       row: 2,
       className: 'gray'
     },
     {
       text: 'Chat with Saul',
-      link: 'https://chat.test.btschwartz.com',
+      link: 'https://chat.btschwartz.com',
       row: 1,
       className: 'pink'
     },
     {
       text: 'Waltuh',
-      link: 'https://test.btschwartz.com/waltuh/',
+      link: 'https://btschwartz.com/waltuh/',
       row: 2,
       className: 'gray'
     },
     {
       text: 'Pics',
-      link: 'https://test.btschwartz.com/pics/',
+      link: 'https://btschwartz.com/pics/',
       row: 1,
       className: 'purple'
     },
@@ -219,7 +219,7 @@ const MorePage = () => {
       modal: ConversationModal,
       modalId: 'convo',
       modalProps: {
-        apiURL: 'https://test.btschwartz.com/api/v1/chat/convo',
+        apiURL: 'https://btschwartz.com/api/v1/chat/convo',
       },
       row: 2,
       className: 'green'
@@ -239,7 +239,7 @@ const MorePage = () => {
       text: 'API',
       row: 1,
       className: 'green',
-      link: 'https://test.btschwartz.com/api/v1/'
+      link: 'https://btschwartz.com/api/v1/'
     },
 
 

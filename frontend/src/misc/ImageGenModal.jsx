@@ -34,7 +34,7 @@ function ImageGenModal({ show, handleClose, onSubmit }) {
         formData.append('prompt', inputValue);
 
 
-        fetch('https://test.btschwartz.com/api/v1/pics/generate', {
+        fetch('https://btschwartz.com/api/v1/pics/generate', {
             method: 'POST',
             body: formData,
         })

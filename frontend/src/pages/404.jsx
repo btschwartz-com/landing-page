@@ -29,7 +29,7 @@ const styles = {
 const buttonData = [
   {
     text: 'Return Home',
-    link: 'https://test.btschwartz.com/',
+    link: 'https://btschwartz.com/',
     type: 'primary'
   },
 

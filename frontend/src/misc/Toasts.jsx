@@ -39,7 +39,7 @@ const styles = {
 }
 
 
-const API_URL = 'https://test.btschwartz.com/api/v1/';
+const API_URL = 'https://btschwartz.com/api/v1/';
 const explanation = "My name is Ben Schwartz, and you just found the landing page of my website. Please check out my portfolio, it's the only decent thing you'll find here.";
 
 
@@ -211,7 +211,7 @@ const ContactMsg = () => {
 const AskChatGPT = (prompt) => {
  
   const gptFetch = (prompt) => {
-    return fetch('https://test.btschwartz.com/api/v1/chat/ask', {
+    return fetch('https://btschwartz.com/api/v1/chat/ask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

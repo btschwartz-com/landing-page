@@ -35,14 +35,14 @@ const buttonData = [
   {
     text: "Visitors",
     row: 1,
-    link: "https://test.btschwartz.com/api/v1/who",
+    link: "https://btschwartz.com/api/v1/who",
     className: 'red'
   },
 
   {
     text: "PMA",
     row: 2,
-    link: "https://test.btschwartz.com/saulmcgill",
+    link: "https://btschwartz.com/saulmcgill",
     className: 'blue'
   },
   
