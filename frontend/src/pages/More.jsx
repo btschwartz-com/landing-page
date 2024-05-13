@@ -160,59 +160,15 @@ const MorePage = () => {
 
 
   const buttonData = [
+
+    // Development and Tools
+    
     
     {
-      text: 'Fun Fact',
-      row: 2,
-      toast: FunFact,
-      className: 'gray'
-    },
-    {
-      text: 'Instagram Clone',
-      link: 'https://btschwartz.com/insta',
-      row: 2,
-      className: 'gray'
-    },
-    {
-      text: 'Chat with Saul',
-      link: 'https://chat.btschwartz.com',
+      text: 'Honeypot Activity',
+      link: 'https://honeypot.btschwartz.com/honeypot/reports',
       row: 1,
-      className: 'pink'
-    },
-    {
-      text: 'Waltuh',
-      link: 'https://btschwartz.com/waltuh/',
-      row: 2,
-      className: 'gray'
-    },
-    {
-      text: 'Pics',
-      link: 'https://btschwartz.com/pics/',
-      row: 1,
-      className: 'purple'
-    },
-    
-    // {
-    //   text: 'Hello Server',
-    //   row: 3,
-    //   toast: ServerInfo,
-    //   className: 'gray'
-    // },
-    // {
-    //   text: 'Image Generator',
-    //   row: 2,
-    //   modal: ImageGenModal,
-    //   modalId: 'imageGenModal',
-
-    //   className: 'gray'
-
-    // },
-    {
-      text: 'Return Home',
-      row: 4,
-      navLink: '/',
-      link: '/',
-      className: 'blue',
+      className: 'red'
     },
     {
       text: 'GPT-4 Convo',
@@ -221,12 +177,99 @@ const MorePage = () => {
       modalProps: {
         apiURL: 'https://btschwartz.com/api/v1/chat/convo',
       },
-      row: 2,
+      row: 1,
       className: 'green'
+    },
+
+    {
+      text: 'API',
+      row: 2,
+      className: 'green',
+      link: 'https://btschwartz.com/api/v1/'
+    },
+
+    {
+      text: 'Token Acquisition',
+      link: 'https://btschwartz.com/api/v1/auth/login',
+      row: 2,
+      className: 'gold'
+    },
+
+
+    // Communication and Social Media
+    {
+      text: 'Chat with Saul',
+      link: 'https://chat.btschwartz.com',
+      row: 3,
+      className: 'purple'
+    },
+    {
+      text: 'Waltuh',
+      link: 'https://btschwartz.com/waltuh/',
+      row: 3,
+      className: 'gray'
+    },
+    {
+      text: 'Icestation Insta',
+      link: 'https://btschwartz.com/icestation',
+      row: 3,
+      className: 'gray'
+    },
+    {
+      text: 'Saul Searcher',
+      link: 'https://saul.btschwartz.com/',
+      row: 3,
+      className: 'gray'
+    },
+    
+    
+  
+    // Fun and Entertainment
+    {
+      text: 'Bliss TV',
+      link: 'https://rigor.btschwartz.com/',
+      row: 4,
+      className: 'gray'
+    },
+    
+    {
+      text: 'Pics',
+      link: 'https://btschwartz.com/pics/',
+      row: 4,
+      className: 'purple'
+    },
+    {
+      text: 'Draft Picker',
+      link: 'https://fish.btschwartz.com/',
+      row: 4,
+      className: 'gray'
+    },
+    {
+      text: 'Instagram Clone',
+      link: 'https://btschwartz.com/insta',
+      row: 4,
+      className: 'gray'
+    },
+
+    // Miscellaneous
+    {
+      text: 'Fun Fact',
+      row: 5,
+      toast: FunFact,
+      className: 'gray'
+    },
+    
+    // Navigation
+    {
+      text: 'Return Home',
+      row: 5,
+      navLink: '/',
+      link: '/',
+      className: 'blue',
     },
     {
       text: 'VIP',
-      row: 4,
+      row: 5,
       modalId: 'vip',
       modal: LoginModal,
       handleClick: () => handleLoginClick(),
@@ -235,15 +278,10 @@ const MorePage = () => {
       },
       className: 'gold'
     },
-    {
-      text: 'API',
-      row: 1,
-      className: 'green',
-      link: 'https://btschwartz.com/api/v1/'
-    },
-
-
-  ]
+    
+    
+  ];
+   
 
 
   const { setHasAnimated } = useContext(AnimationContext);

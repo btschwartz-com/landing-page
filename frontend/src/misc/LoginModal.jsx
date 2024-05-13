@@ -35,7 +35,7 @@ function LoginModal({ show, handleClose, onSuccess }) {
       .then((response) => {
         if (!response.ok) {
           if (response.status === 401) {
-            setErrorMessage('Invalid username or password');
+            setErrorMessage('Invalid credentials');
           }
           else {
             setErrorMessage('Something went wrong :(');
