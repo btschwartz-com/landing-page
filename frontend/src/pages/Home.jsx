@@ -74,7 +74,7 @@ function getRandomType() {
 
 const buttonData = [
   {
-    text: 'What?',
+    text: 'Huh?',
     row: 1,
     toast: Explanation,
     className: 'gold'
