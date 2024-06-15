@@ -92,7 +92,7 @@ const buttonData = [
   },
   {
     text: 'Portfolio',
-    link: 'https://btschwartz.com/portfolio/',
+    link: 'https://backup.btschwartz.com/portfolio/',
     row: 3,
     className: 'purple'
 
@@ -237,7 +237,7 @@ const Home = () => {
 
 
   const redirectToPortfolio = () => {
-    window.location.href = "https://btschwartz.com/portfolio/";
+    window.location.href = "https://backup.btschwartz.com/portfolio/";
     // navigate('/portfolio')
   }
 
