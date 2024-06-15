@@ -106,7 +106,7 @@ const buttonData = [
   },
   {
     text: 'Resume',
-    link: 'https://btschwartz.com/resume.pdf',
+    link: 'https://backup.btschwartz.com/resume.pdf',
     row: 3,
     className: 'black'
   },

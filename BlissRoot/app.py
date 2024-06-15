@@ -41,7 +41,7 @@ def ratelimit_error(e):
 @app.route('/resume.pdf')
 @app.route('/resume')
 def resume():
-    return flask.redirect("https://btschwartz.com/api/resume.pdf")
+    return flask.redirect("https://backup.btschwartz.com/api/resume.pdf")
 
 @app.route('/')
 @app.route('/more')
