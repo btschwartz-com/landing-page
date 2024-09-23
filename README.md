@@ -1,4 +1,4 @@
-My personal website.
+My old personal website.
 
-[btschwartz.com](https://btschwartz.com)
+[old.btschwartz.com](https://old.btschwartz.com)
 
